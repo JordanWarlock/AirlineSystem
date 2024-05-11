@@ -1,3 +1,14 @@
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Searchbar css*/
+
 .search-container {
   width: 300px;
   height: 40px;
@@ -19,16 +30,8 @@
   background-color: white;
   border: none;
   width: 100%;
-  font-size: 1.25rem;
+  font-size: 1rem;
   outline: none;
-}
-
-.main-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* SearchResults css*/

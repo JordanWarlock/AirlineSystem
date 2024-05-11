@@ -11,7 +11,7 @@ db = PyMongo(app).db
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/search", methods=["POST"])
+@app.route("/api/search", methods=["POST"])
 def search():
     data = request.get_json()
     search_value = data.get("search_value")
@@ -24,7 +24,7 @@ def search():
         ]
     },
     {"_id": 0, "name": 1, "code": 1}
-).sort("name", 1)
+).sort("name", 1).limit(5)
     similar_results = list(results)
     return jsonify(similar_results)
 
