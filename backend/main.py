@@ -1,6 +1,8 @@
 from flask import Flask,request,jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
+from scrapeFlights import onewayScrape
+
 
 app = Flask(__name__)
 CORS(app)
@@ -27,5 +29,10 @@ def search():
 ).sort("name", 1).limit(5)
     similar_results = list(results)
     return jsonify(similar_results)
+
+@app.route("/api/flightData")
+def getData():
+    data = onewayScrape('ISB','JED','2024-05-14')
+    return jsonify(data)
 
 app.run(debug=True)
