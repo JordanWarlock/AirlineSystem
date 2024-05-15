@@ -6,7 +6,9 @@ from scrapeFlights import onewayScrape
 
 app = Flask(__name__)
 CORS(app)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/Airline"
+
+app.config["SECRET_KEY"] = "667c685dfd85c3cefead9b1a4aa8dda591891daf"
+app.config["MONGO_URI"] = "mongodb+srv://Jordan:JordanPassword@cluster0.hwxs0tu.mongodb.net/Airline?retryWrites=true&w=majority&appName=Cluster0"
 db = PyMongo(app).db
 
 @app.route("/")
