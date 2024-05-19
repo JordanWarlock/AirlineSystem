@@ -1,8 +1,7 @@
 import "./App.css";
 import BookingPage from "./Pages/BookingPage";
 import HomePage from "./Pages/HomePage";
-import { BrowserRouter as Router, Route, Routes, Switch } from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
