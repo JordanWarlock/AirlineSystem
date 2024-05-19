@@ -1,8 +1,47 @@
-.h1{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center  ;
+/* Header.css */
+
+.h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
 }
 
-logo_img{
-    text-align: center;
+header {
+  background-image: url("../Pictures/h1-rom-lon-was-collage-hn.jpg");
+  background-size: cover;
+  height: 450px;
+  position: relative;
+  color: white;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  padding-left: 300px;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+  margin-left: 100px;
+}
+
+header nav ul h1,
+header nav ul h2 {
+  margin: 0;
+}
+
+header nav ul h1 li,
+header nav ul h2 li {
+  margin-right: 20px;
+}
+
+header nav ul h2 {
+  display: flex;
+  list-style: none;
+  margin-left: 100px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
 }
