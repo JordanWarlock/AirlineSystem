@@ -2,7 +2,7 @@ from flask import Flask,request,jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from scrapeFlights import onewayScrape
-
+from chatbot import generateAIResponse
 
 app = Flask(__name__)
 CORS(app)
@@ -35,5 +35,19 @@ def search():
 def getData():
     data = onewayScrape('ISB','JED','2024-05-14')
     return jsonify(data)
+
+
+@app.route("/api/generateResponse", methods=["POST"])
+def getResponse():
+    data = request.get_json()
+    humanMessage = data.get("message")
+    ai_response = generateAIResponse(humanMessage)
+    payload = {
+        "type" : "AI",
+        "message" : ai_response
+    }
+
+    return jsonify(payload)
+
 
 app.run(debug=True)

@@ -1,0 +1,43 @@
+.container {
+  padding: 5% 10%;
+  overflow: hidden;
+}
+
+.chat-space-wrapper {
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 10px 20px;
+  height: 70vh;
+}
+
+.text {
+  max-width: 50%;
+  padding: 5px 20px;
+  margin: 10px 0px;
+  border-radius: 20px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.text-human {
+  text-align: right;
+  background-color: green;
+  align-self: flex-end;
+}
+
+.text-ai {
+  text-align: left;
+  align-self: flex-start;
+  background-color: lightblue;
+}
+
+.message-input {
+  padding: 10px 10px;
+  border-radius: 20px;
+  font-size: 1rem;
+  margin: 10px 0px;
+  margin-top: auto;
+}
