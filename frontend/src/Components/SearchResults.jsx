@@ -9,9 +9,9 @@ const SearchResults = ({
   const [resultSelected, setResultSelected] = useState("");
 
   const onResultSelection = (result) => {
-    handleResultSelection(result["name"]); // Setting result's name as input field value
-    setResultSelected(result["name"]);
-    selectedResult(result["name"]);
+    handleResultSelection(result["name"]); // Setting result's name as input field value on webpage
+    setResultSelected(result["name"]); // setting it again for local verification
+    selectedResult(result); // setting it to get the value back to the booking page
     setResults([]);
   };
   useEffect(() => {

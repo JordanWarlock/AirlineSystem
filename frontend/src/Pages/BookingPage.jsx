@@ -1,26 +1,63 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router";
+import axios from "axios";
 import "../css/BookingPage.css";
 import Searchbar from "../Components/Searchbar";
 
 const BookingPage = () => {
   const [selectedDestination, setSeletedDestination] = useState("");
   const [selectedDeparture, setSeletedDeparture] = useState("");
+  const [flightType, setFlightType] = useState("OneWay");
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
 
-  const handleSearch = () => {
-    if (selectedDeparture === "") {
-      console.log("departure doesnt exist");
+  const navigate = useNavigate();
+
+  const handleSearch = async () => {
+    if (
+      selectedDeparture !== "" &&
+      selectedDestination !== "" &&
+      departureDate !== ""
+    ) {
+      if (flightType === "OneWay") {
+        try {
+          const payload = {
+            departureCode: selectedDeparture["code"],
+            destinationCode: selectedDestination["code"],
+            depDate: departureDate,
+            passengerCount: 1,
+            cabinClass: "ECONOMY",
+          };
+          const response = await axios.post(
+            "http://localhost:5000/api/flightData",
+            payload
+          );
+          navigate("/flightResults", {
+            state: { flightResults: response.data },
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      } else if (flightType === "Return" && returnDate !== "") {
+      } else {
+        console.log("Fill all fields");
+      }
     } else {
-      console.log("departure exists");
-    }
-    if (selectedDestination === "") {
-      console.log("destination doesnt exist");
-    } else {
-      console.log("destination exists");
+      console.log("Fill all fields");
     }
   };
   return (
     <div className="main-container">
+      <select
+        name="flight_type"
+        id="type"
+        onChange={(e) => {
+          setFlightType(e.target.value);
+        }}
+      >
+        <option value="OneWay">OneWay</option>
+        <option value="Return">Return</option>
+      </select>
       <Searchbar
         setSearchResult={setSeletedDeparture}
         icon="fa-solid fa-plane"
@@ -31,6 +68,22 @@ const BookingPage = () => {
         icon="fa-solid fa-arrow-left"
         placeHolder="To?"
       />
+      <input
+        type="date"
+        onChange={(e) => {
+          setDepartureDate(e.target.value);
+        }}
+      />
+      {flightType !== "OneWay" ? (
+        <input
+          type="date"
+          onChange={(e) => {
+            setReturnDate(e.target.value);
+          }}
+        ></input>
+      ) : (
+        <></>
+      )}
       <button onClick={() => handleSearch()}>Search</button>
     </div>
   );

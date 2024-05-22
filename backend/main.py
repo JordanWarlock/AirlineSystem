@@ -1,7 +1,7 @@
 from flask import Flask,request,jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
-from scrapeFlights import onewayScrape
+from scrapeFlights import get_oneway_flights
 from chatbot import generateAIResponse
 
 app = Flask(__name__)
@@ -31,9 +31,16 @@ def search():
     similar_results = list(results)
     return jsonify(similar_results)
 
-@app.route("/api/flightData")
+@app.route("/api/flightData",methods=["POST"])
 def getData():
-    data = onewayScrape('ISB','JED','2024-05-14')
+    params = request.get_json()
+    departureCode = params.get("departureCode")
+    destinationCode = params.get("destinationCode")
+    departureDate = params.get("depDate")
+    passengerCount = params.get("passengerCount")
+    cabinClass = params.get("cabinClass")
+
+    data = get_oneway_flights(departureCode,destinationCode,departureDate,passengerCount,cabinClass)
     return jsonify(data)
 
 
