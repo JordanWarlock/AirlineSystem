@@ -19,6 +19,10 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+    setMessage('Passwords do not match');
+    return;
+  }
     const user = { firstName,lastName,age,gender,country,wantOffers,message, email, password,confirmPassword };
 
     try {

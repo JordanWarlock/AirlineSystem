@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Header = ({ imageUrl }) => {
   return (
-    <header style={{ backgroundImage: `url(${imageUrl})` }}>
+    <header style={{ backgroundImage: `url(${imageUrl})`}}>
       
         <nav>
           <ul>
@@ -47,6 +47,14 @@ const Header = ({ imageUrl }) => {
           </ul>
         </nav>
       
+      <div className="write">
+      <h1>
+        <ul>
+        <li>Experience the ultimate in</li>
+        <li>Premium travel</li>
+      </ul>
+      </h1>
+      </div>
     </header>
   );
 };

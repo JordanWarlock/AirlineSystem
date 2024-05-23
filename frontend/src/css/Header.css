@@ -9,6 +9,10 @@ header {
   height: 450px;
   position: relative;
   color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+}
+header img{
+    filter: brightness(70%);
 }
 
 header .container {
@@ -17,7 +21,7 @@ header .container {
   padding-left: 300px;
 }
 
-ul {
+header nav ul {
   display: flex;
   list-style: none;
   margin-left: 300px;
@@ -49,4 +53,15 @@ header nav ul h3{
 header nav ul li a {
   text-decoration: none;
   color: white;
+}
+header .write h1{
+  padding-left: 300px;
+  font-family: 'Times New Roman', Times, serif;
+  padding-top: 15px;
+}
+
+header .write ul li{
+  flex: 0 0 calc(33.33% - 10px);
+  margin-bottom: 5px;
+  list-style-type: none;
 }
