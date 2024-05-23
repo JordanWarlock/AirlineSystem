@@ -1,0 +1,76 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    /* Set the position to relative */
+    z-index: 2;
+    /* Ensure the header is above the form */
+}
+
+.floating-form {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    max-width: 600px;
+    margin: -50px auto 20px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.floating-form h1 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.floating-form input[type="text"],
+.floating-form input[type="email"],
+.floating-form input[type="number"],
+.floating-form input[type="password"],
+.floating-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.floating-form select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+}
+
+.floating-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.floating-form button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

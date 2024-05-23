@@ -2,10 +2,10 @@ import React from "react";
 import "../css/Header.css";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ imageUrl }) => {
   return (
-    <header>
-      <div className="container">
+    <header style={{ backgroundImage: `url(${imageUrl})` }}>
+      
         <nav>
           <ul>
             <h1>
@@ -23,23 +23,30 @@ const Header = () => {
               </li>
               <li>
                 <Link to="/bookingPage" className="link">
-                  Booking Page
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="link">
-                  About
+                  Book
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="link">
-                  Contact Us
+                  Help
                 </Link>
               </li>
             </h2>
+            <h3>
+              <li>
+                <Link to="/login" className="link">
+                  Log In
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup" className="link">
+                  | Sign Up
+                </Link>
+              </li>
+            </h3>
           </ul>
         </nav>
-      </div>
+      
     </header>
   );
 };
