@@ -14,7 +14,7 @@ function App() {
         <Route path="/bookingPage" element={<BookingPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/flightresult" element={<FlightResult />} />
+        <Route path="/flightResults" element={<FlightResult />} />
       </Routes>
     </Router>
   );
