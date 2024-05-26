@@ -29,7 +29,7 @@ const BookingPage = () => {
             cabinClass: "ECONOMY",
           };
           const response = await axios.post(
-            "http://localhost:5000/api/flightData",
+            "http://localhost:5000/api/flightData/oneway",
             payload
           );
           navigate("/flightResults", {
@@ -39,6 +39,25 @@ const BookingPage = () => {
           console.error(err);
         }
       } else if (flightType === "Return" && returnDate !== "") {
+        try {
+          const payload = {
+            departureCode: selectedDeparture["code"],
+            destinationCode: selectedDestination["code"],
+            depDate: departureDate,
+            retDate: returnDate,
+            passengerCount: 1,
+            cabinClass: "ECONOMY",
+          };
+          const response = await axios.post(
+            "http://localhost:5000/api/flightData/return",
+            payload
+          );
+          navigate("/flightResults", {
+            state: { flightResults: response.data },
+          });
+        } catch (err) {
+          console.error(err);
+        }
       } else {
         console.log("Fill all fields");
       }

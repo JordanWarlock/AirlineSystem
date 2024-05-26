@@ -1,7 +1,7 @@
 from flask import Flask,request,jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
-from scrapeFlights import get_oneway_flights
+from scrapeFlights import get_oneway_flights,get_return_flights
 from chatbot import generateAIResponse
 
 app = Flask(__name__)
@@ -31,8 +31,8 @@ def search():
     similar_results = list(results)
     return jsonify(similar_results)
 
-@app.route("/api/flightData",methods=["POST"])
-def getData():
+@app.route("/api/flightData/oneway",methods=["POST"])
+def getOnewayFlightsData():
     params = request.get_json()
     departureCode = params.get("departureCode")
     destinationCode = params.get("destinationCode")
@@ -42,6 +42,26 @@ def getData():
 
     data = get_oneway_flights(departureCode,destinationCode,departureDate,passengerCount,cabinClass)
     return jsonify(data)
+
+
+@app.route("/api/flightData/return",methods=["POST"])
+def getReturnFlightsData():
+    params = request.get_json()
+    departureCode = params.get("departureCode")
+    destinationCode = params.get("destinationCode")
+    departureDate = params.get("depDate")
+    returnDate = params.get("retDate")
+    passengerCount = params.get("passengerCount")
+    cabinClass = params.get("cabinClass")
+
+    data = get_return_flights(departureCode,destinationCode,departureDate,returnDate,passengerCount,cabinClass)
+    return jsonify(data)
+
+
+@app.route("/api/currencyRates",methods=["GET"])
+def getCurrencyRates():
+    results = db.CurrencyRates.find_one({},{"_id": 0, "search_date_time": 1, "rates": 1})
+    return jsonify(results)
 
 
 @app.route("/api/generateResponse", methods=["POST"])
