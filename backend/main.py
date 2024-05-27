@@ -44,6 +44,40 @@ def getOnewayFlightsData():
     return jsonify(data)
 
 
+@app.route("/api/signup",methods=["POST"])
+def setSignupData():
+    params = request.get_json()
+    firstName = params.get("firstName")
+    lastName = params.get("lastName")
+    age =  params.get("age")
+    gender =  params.get("gender")
+    country =  params.get("country")
+    email =  params.get("email")
+    password =  params.get("password")
+    db.users.insert_one({
+        "firstName": firstName,
+        "lastName": lastName,
+        "age": age,
+        "gender": gender,
+        "country": country,
+        "email": email,
+        "password": password
+    })
+    return "User Added Successfully"
+
+
+@app.route("/api/login",methods=["POST"])
+def getLoginData():
+    params = request.get_json()
+    departureCode = params.get("departureCode")
+    destinationCode = params.get("destinationCode")
+    departureDate = params.get("depDate")
+    passengerCount = params.get("passengerCount")
+    cabinClass = params.get("cabinClass")
+
+    data = get_oneway_flights(departureCode,destinationCode,departureDate,passengerCount,cabinClass)
+    return jsonify(data)
+
 @app.route("/api/flightData/return",methods=["POST"])
 def getReturnFlightsData():
     params = request.get_json()
