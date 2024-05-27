@@ -22,8 +22,13 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
     const finalPrice = totalBasePrice * rate;
     return finalPrice.toFixed(0);
   };
-  const handleViewDetails = () => {
+  const handleViewDetails = (e) => {
     setShowDetails(!showDetails);
+    if (showDetails === false) {
+      e.target.innerHTML = "Hide Details";
+    } else {
+      e.target.innerHTML = "View Details";
+    }
   };
 
   return (
@@ -47,8 +52,8 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
           </p>
         </div>
       ))}
-      <p>{getPrice(total) + " " + currency}</p>
-      <button onClick={handleViewDetails}>View Details</button>
+      <p>{"Price : " + getPrice(total) + " " + currency}</p>
+      <button onClick={(e) => handleViewDetails(e)}>View Details</button>
       {showDetails && (
         <div className="details">
           <DetailedFlightResult
