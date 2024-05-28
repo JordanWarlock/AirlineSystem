@@ -75,7 +75,7 @@ body {
     background-color: #0056b3;
 }
 
-.error-message {
+.error {
     color: red;
     font-size: 12px;
     margin-top: 5px;

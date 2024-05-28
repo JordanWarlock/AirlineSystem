@@ -71,6 +71,17 @@ def setSignupData():
     })
     return "User Added Successfully", 201
 
+@app.route("/api/login", methods=["POST"])
+def login():
+    params = request.get_json()
+    email = params.get("email")
+    password = params.get("password")
+
+    user = db.users.find_one({"email": email})
+    if user and user["password"] == password:
+        return {"message": "Login successful"}, 200
+    return {"message": "Invalid email or password"}, 401
+
 @app.route("/api/login",methods=["POST"])
 def getLoginData():
     params = request.get_json()

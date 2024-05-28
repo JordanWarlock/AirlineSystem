@@ -65,8 +65,8 @@ const Header = ({ imageUrl }) => {
         </ul>
       </h3>
       </div>
-          <button className="button" type="submit">
-            <Link to="/signup" className="link">
+          <button className="button" type="submit" >
+            <Link to="/signup" className="link" >
             Try For Free
             </Link>
             </button>

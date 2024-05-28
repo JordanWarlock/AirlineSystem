@@ -4,7 +4,7 @@ import signupImageUrl from "../Pictures/signup.jpg";
 import Header from "../Components/Header";
 import "../css/SignUpPage.css";
 import Footer from "../Components/Footer";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 
 function App() {
@@ -17,14 +17,14 @@ function App() {
   const [wantOffers, setWantOffers] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const [confirmPassword, setConfrimPassword] = useState("");
     const [emailError, setEmailError] = useState("");
-
+const [generalError, setGeneralError] = useState("");
+    
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
+      setGeneralError("Passwords do not match");
       return;
     }
 
@@ -40,15 +40,15 @@ function App() {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/signup",
-        user
-      );
-      setMessage(response.data);
-      console.log(message);
+      const response = await axios.post("http://localhost:5000/api/signup", user);
+      setGeneralError("");
       navigate("/");
     } catch (error) {
-      setMessage("Error registering user");
+      if (error.response && error.response.status === 400) {
+        setEmailError("Email already registered");
+      } else {
+        setGeneralError("Error registering user");
+      }
     }
   };
 
@@ -76,7 +76,10 @@ function App() {
             type="email"
             placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailError(""); 
+            }}
             required
           />
           {emailError && <p className="error">{emailError}</p>}
@@ -108,16 +111,23 @@ function App() {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {setPassword(e.target.value);
+              setGeneralError("");}
+            }
             required
           />
+
           <input
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
-            onChange={(e) => setConfrimPassword(e.target.value)}
+            onChange={(e) => {setConfrimPassword(e.target.value);
+              setGeneralError("");
+            }}
             required
           />
+          {generalError && <p className="error">{generalError}</p>}
+
           <select
             value={wantOffers}
             onChange={(e) => setWantOffers(e.target.value)}
@@ -129,11 +139,6 @@ function App() {
           </select>
           <button type="submit">Sign Up</button>
         </form>
-        {emailError && (
-          <p className="instruction">
-            Please enter a different email address.
-          </p>
-        )}
       </div>
       <Footer/>
     </div>
