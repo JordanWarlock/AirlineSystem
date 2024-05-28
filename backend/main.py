@@ -82,17 +82,6 @@ def login():
         return {"message": "Login successful"}, 200
     return {"message": "Invalid email or password"}, 401
 
-@app.route("/api/login",methods=["POST"])
-def getLoginData():
-    params = request.get_json()
-    departureCode = params.get("departureCode")
-    destinationCode = params.get("destinationCode")
-    departureDate = params.get("depDate")
-    passengerCount = params.get("passengerCount")
-    cabinClass = params.get("cabinClass")
-
-    data = get_oneway_flights(departureCode,destinationCode,departureDate,passengerCount,cabinClass)
-    return jsonify(data)
 
 @app.route("/api/flightData/return",methods=["POST"])
 def getReturnFlightsData():

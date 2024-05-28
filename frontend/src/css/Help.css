@@ -4,6 +4,7 @@
 }
 
 .chat-space-wrapper {
+  background-color: white;
   border: 1px solid;
   display: flex;
   flex-direction: column;
@@ -11,6 +12,17 @@
   border-radius: 20px;
   padding: 10px 20px;
   height: 70vh;
+}
+
+.container h1{
+  padding-left: 35%;
+  color:black;
+display: inline-block;
+}
+
+.container h1 .AI{
+  color: orange;
+  display: inline-block;
 }
 
 .text {
