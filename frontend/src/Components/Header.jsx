@@ -27,7 +27,7 @@ const Header = ({ imageUrl }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="link">
+                <Link to="/help" className="link">
                   Help
                 </Link>
               </li>
