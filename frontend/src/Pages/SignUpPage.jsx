@@ -4,8 +4,11 @@ import signupImageUrl from "../Pictures/signup.jpg";
 import Header from "../Components/Header";
 import "../css/SignUpPage.css";
 import Footer from "../Components/Footer";
+import { useNavigate } from "react-router";
+
 
 function App() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [age, setAge] = useState("");
   const [lastName, setLastName] = useState("");
@@ -16,6 +19,7 @@ function App() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [confirmPassword, setConfrimPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +27,7 @@ function App() {
       setMessage("Passwords do not match");
       return;
     }
+
 
     const user = {
       firstName: firstName,
@@ -41,6 +46,7 @@ function App() {
       );
       setMessage(response.data);
       console.log(message);
+      navigate("/");
     } catch (error) {
       setMessage("Error registering user");
     }
@@ -73,6 +79,7 @@ function App() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          {emailError && <p className="error">{emailError}</p>}
           <input
             type="number"
             placeholder="Age"
@@ -122,6 +129,11 @@ function App() {
           </select>
           <button type="submit">Sign Up</button>
         </form>
+        {emailError && (
+          <p className="instruction">
+            Please enter a different email address.
+          </p>
+        )}
       </div>
       <Footer/>
     </div>

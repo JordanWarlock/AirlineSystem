@@ -80,3 +80,9 @@ body {
     font-size: 12px;
     margin-top: 5px;
 }
+
+.instruction {
+    color: #666;
+    /* Gray color for instruction message */
+    font-size: 14px;
+}
