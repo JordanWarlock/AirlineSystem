@@ -1,0 +1,91 @@
+.flight-status {
+    padding: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  p {
+    text-align: center;
+  }
+  
+  .search-options {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .search-options button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    max-width: 150px;
+  }
+  
+  .search-options button.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .view-details {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .flight-details {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Media Queries for Responsive Design */
+  @media (max-width: 860px) {
+    .search-options {
+      flex-direction: column;
+    }
+  
+    .search-options button {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .search-options button {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    .view-details {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+  
