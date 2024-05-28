@@ -1,67 +1,104 @@
-
-.h1 {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-}
-
 header {
   background-size: cover;
-  height: 450px;
+  background-position: center;
+  padding: 20px;
   position: relative;
   color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-}
-header img{
-    filter: brightness(70%);
 }
 
-header .container {
-  display: flex;
-  align-items: center;
-  padding-left: 300px;
-}
-
-header nav ul {
-  display: flex;
+nav ul.main-nav {
   list-style: none;
-  margin-left: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul.main-nav h1,
+nav ul.main-nav h2,
+nav ul.main-nav h3 {
+  margin: 0;
+  padding: 0;
+  display: flex;
   align-items: center;
 }
 
-header nav ul h1,
-header nav ul h2,
-header nav ul h3 {
-  margin: top 15px;;
-}
-
-header nav ul h1 li,
-header nav ul h2 li {
+nav ul.main-nav li {
   margin-right: 20px;
 }
 
-header nav ul h3 li{
-  margin-right: 5px;
-}
-
-header nav ul h2,
-header nav ul h3{
-  display: flex;
-  list-style: none;
-  margin-left: 100px;
-}
-
-header nav ul li a {
+nav ul.main-nav .link {
   text-decoration: none;
   color: white;
-}
-header .write h1{
-  padding-left: 300px;
-  font-family: 'Times New Roman', Times, serif;
-  padding-top: 15px;
+  font-weight: bold;
 }
 
-header .write ul li{
-  flex: 0 0 calc(33.33% - 10px);
-  margin-bottom: 5px;
-  list-style-type: none;
+.write {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.write h1 {
+  font-size: 2.5em;
+  margin: 0;
+  padding: 0;
+}
+
+.write ul {
+  list-style: none;
+  padding: 0;
+}
+
+.write ul li {
+  margin: 10px 0;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mobile-menu-button {
+  display: none;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 860px) {
+  nav ul.main-nav {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .mobile-menu li {
+    margin: 10px 0;
+  }
+
+  .write h1 {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .write h1 {
+    font-size: 1.5em;
+  }
 }
