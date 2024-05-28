@@ -6,9 +6,12 @@ import tensorflow as tf
 import nltk
 from nltk.stem import WordNetLemmatizer
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
 
-key = 'sk-proj-QquzIgfGcE4E4krAMdy8T3BlbkFJA0zNJ8hcOXCtGDNaSK9W'
+load_dotenv()
+key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=key)
 
 
