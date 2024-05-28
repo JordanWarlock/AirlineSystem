@@ -2,7 +2,7 @@ from flask import Flask,request,jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from scrapeFlights import get_oneway_flights,get_return_flights
-from chatbot import generateAIResponse
+from chatbot.chatbotImplementaion import chatbot_response
 
 app = Flask(__name__)
 CORS(app)
@@ -107,10 +107,12 @@ def getCurrencyRates():
 def getResponse():
     data = request.get_json()
     humanMessage = data.get("message")
-    ai_response = generateAIResponse(humanMessage)
+    conversation_state = data.get("conversation_state")
+    ai_response = chatbot_response(humanMessage,conversation_state)
     payload = {
         "type" : "AI",
-        "message" : ai_response
+        "message" : ai_response["response"],
+        "conversation_state": ai_response["conversation_state"]
     }
 
     return jsonify(payload)

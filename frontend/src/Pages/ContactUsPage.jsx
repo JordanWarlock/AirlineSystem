@@ -4,6 +4,7 @@ import axios from "axios";
 
 const ContactUsPage = () => {
   const [chats, setChats] = useState([]);
+  const [conversationState, setConversationState] = useState({});
   const chatSpaceRef = useRef(null);
   const fetchAIResponse = async (chat) => {
     try {
@@ -12,6 +13,7 @@ const ContactUsPage = () => {
         chat
       );
       setChats((prevChats) => [...prevChats, response.data]);
+      setConversationState(response.data.conversation_state);
     } catch (err) {
       console.error(err);
     }
@@ -23,6 +25,7 @@ const ContactUsPage = () => {
         const chat = {
           message: e.target.value,
           type: "Human",
+          conversation_state: conversationState,
         };
         setChats((prevChats) => [...prevChats, chat]);
         fetchAIResponse(chat);

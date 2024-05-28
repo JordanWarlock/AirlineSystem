@@ -1,0 +1,795 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hello", "Hi", "Hey", "Greetings", "What's up?", "Howdy"],
+      "responses": [
+        "Hello!",
+        "Hi there!",
+        "Greetings!",
+        "Hey!",
+        "How can I assist you today?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Goodbye",
+        "Bye",
+        "See you later",
+        "Take care",
+        "Catch you later"
+      ],
+      "responses": [
+        "Goodbye!",
+        "See you later!",
+        "Take care!",
+        "Bye! Have a great day!"
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "I appreciate it",
+        "Thanks a lot",
+        "Thanks so much"
+      ],
+      "responses": [
+        "You're welcome!",
+        "No problem!",
+        "My pleasure!",
+        "Anytime!",
+        "Glad to help!"
+      ]
+    },
+    {
+      "tag": "no_response",
+      "patterns": [" ", "I don't know", "No idea", "Not sure"],
+      "responses": [
+        "Can you please elaborate?",
+        "I didn't quite catch that.",
+        "Could you say that again?",
+        "I'm here to help, can you give me more details?"
+      ]
+    },
+    {
+      "tag": "name",
+      "patterns": [
+        "What's your name?",
+        "Who are you?",
+        "Can you tell me your name?"
+      ],
+      "responses": [
+        "I am a chatbot.",
+        "I am your virtual assistant.",
+        "I'm here to help you!"
+      ]
+    },
+    {
+      "tag": "age",
+      "patterns": [
+        "How old are you?",
+        "What's your age?",
+        "When were you created?"
+      ],
+      "responses": [
+        "I am timeless.",
+        "I exist in the digital realm.",
+        "I was created by OpenAI."
+      ]
+    },
+    {
+      "tag": "how_are_you",
+      "patterns": ["How are you?", "How's it going?", "How do you feel?"],
+      "responses": [
+        "I'm just a bunch of code, but I'm here to help you!",
+        "I'm doing great, thanks for asking!",
+        "Ready to assist you!"
+      ]
+    },
+    {
+      "tag": "jokes",
+      "patterns": ["Tell me a joke", "Do you know any jokes?", "Make me laugh"],
+      "responses": [
+        "Why don't scientists trust atoms? Because they make up everything!",
+        "What do you get if you cross a snowman and a vampire? Frostbite!",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!"
+      ]
+    },
+    {
+      "tag": "creator",
+      "patterns": [
+        "Who created you?",
+        "Who is your creator?",
+        "Who made you?",
+        "Who built you?"
+      ],
+      "responses": [
+        "I was created by Fawaz.",
+        "Fawaz developed me.",
+        "I am a product of Fawaz and his free time."
+      ]
+    },
+    {
+      "tag": "time",
+      "patterns": [
+        "What time is it?",
+        "Can you tell me time?",
+        "What's current time?"
+      ],
+      "responses": [
+        "I can't tell the time. Please check your device.",
+        "You can check the current time on your phone or watch.",
+        "Time is a concept that's beyond my direct perception."
+      ]
+    },
+    {
+      "tag": "date",
+      "patterns": [
+        "What's the date?",
+        "Can you tell me today's date?",
+        "What is today's date?"
+      ],
+      "responses": [
+        "I'm not sure of the exact date, but your device should have that information.",
+        "Please check the date on your device.",
+        "I recommend using a calendar app for the current date."
+      ]
+    },
+    {
+      "tag": "favorite_color",
+      "patterns": [
+        "What's your favorite color?",
+        "Do you have a favorite color?",
+        "What's the best color?"
+      ],
+      "responses": [
+        "I don't have preferences, but I can tell you about colors!",
+        "I like all colors equally.",
+        "Colors are all beautiful in their own way!"
+      ]
+    },
+    {
+      "tag": "music",
+      "patterns": [
+        "Do you like music?",
+        "What's your favorite song?",
+        "Can you play some music?"
+      ],
+      "responses": [
+        "I don't listen to music, but I can help you find some!",
+        "I don't have ears, but music is great!",
+        "Music is wonderful, isn't it?"
+      ]
+    },
+    {
+      "tag": "hobbies",
+      "patterns": [
+        "Do you have any hobbies?",
+        "What do you do for fun?",
+        "How do you spend your time?"
+      ],
+      "responses": [
+        "I enjoy helping people like you.",
+        "I'm always here to assist you.",
+        "I don't have hobbies, but I love answering your questions!"
+      ]
+    },
+    {
+      "tag": "sports",
+      "patterns": [
+        "Do you like sports?",
+        "What's your favorite sport?",
+        "Do you play any sports?"
+      ],
+      "responses": [
+        "I don't play sports, but I can provide information about them.",
+        "Sports are great! Which one do you like?",
+        "I can help you find information on various sports."
+      ]
+    },
+    {
+      "tag": "book",
+      "patterns": [
+        "Do you like reading?",
+        "What's your favorite book?",
+        "Can you recommend a book?"
+      ],
+      "responses": [
+        "Books are amazing! What genre do you like?",
+        "I can help you find popular books.",
+        "Reading is a great way to learn new things!"
+      ]
+    },
+    {
+      "tag": "movies",
+      "patterns": [
+        "Do you like movies?",
+        "What's your favorite movie?",
+        "Can you recommend a movie?"
+      ],
+      "responses": [
+        "Movies are a great form of entertainment!",
+        "I can suggest some popular movies.",
+        "What genre of movies do you enjoy?"
+      ]
+    },
+    {
+      "tag": "greeting",
+      "patterns": ["Hello", "Hi", "Hey", "Greetings", "What's up?", "Howdy"],
+      "responses": [
+        "Hello!",
+        "Hi there!",
+        "Greetings!",
+        "Hey!",
+        "How can I assist you today?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Goodbye",
+        "Bye",
+        "See you later",
+        "Take care",
+        "Catch you later"
+      ],
+      "responses": [
+        "Goodbye!",
+        "See you later!",
+        "Take care!",
+        "Bye! Have a great day!"
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "I appreciate it",
+        "Thanks a lot",
+        "Thanks so much"
+      ],
+      "responses": [
+        "You're welcome!",
+        "No problem!",
+        "My pleasure!",
+        "Anytime!",
+        "Glad to help!"
+      ]
+    },
+    {
+      "tag": "no_response",
+      "patterns": [" ", "I don't know", "No idea", "Not sure"],
+      "responses": [
+        "Can you please elaborate?",
+        "I didn't quite catch that.",
+        "Could you say that again?",
+        "I'm here to help, can you give me more details?"
+      ]
+    },
+    {
+      "tag": "name",
+      "patterns": [
+        "What's your name?",
+        "Who are you?",
+        "Can you tell me your name?"
+      ],
+      "responses": [
+        "I am a chatbot.",
+        "I am your virtual assistant.",
+        "I'm here to help you!"
+      ]
+    },
+    {
+      "tag": "age",
+      "patterns": [
+        "How old are you?",
+        "What's your age?",
+        "When were you created?"
+      ],
+      "responses": [
+        "I am timeless.",
+        "I exist in the digital realm.",
+        "I was created by OpenAI."
+      ]
+    },
+    {
+      "tag": "how_are_you",
+      "patterns": ["How are you?", "How's it going?", "How do you feel?"],
+      "responses": [
+        "I'm just a bunch of code, but I'm here to help you!",
+        "I'm doing great, thanks for asking!",
+        "Ready to assist you!"
+      ]
+    },
+    {
+      "tag": "jokes",
+      "patterns": ["Tell me a joke", "Do you know any jokes?", "Make me laugh"],
+      "responses": [
+        "Why don't scientists trust atoms? Because they make up everything!",
+        "What do you get if you cross a snowman and a vampire? Frostbite!",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!"
+      ]
+    },
+    {
+      "tag": "creator",
+      "patterns": [
+        "Who created you?",
+        "Who is your creator?",
+        "Who built you?"
+      ],
+      "responses": [
+        "I was created by OpenAI.",
+        "OpenAI developed me.",
+        "I am a product of OpenAI."
+      ]
+    },
+    {
+      "tag": "date",
+      "patterns": [
+        "What's the date?",
+        "Can you tell me today's date?",
+        "What is today's date?"
+      ],
+      "responses": [
+        "I'm not sure of the exact date, but your device should have that information.",
+        "Please check the date on your device.",
+        "I recommend using a calendar app for the current date."
+      ]
+    },
+    {
+      "tag": "favorite_color",
+      "patterns": [
+        "What's your favorite color?",
+        "Do you have a favorite color?",
+        "What's the best color?"
+      ],
+      "responses": [
+        "I don't have preferences, but I can tell you about colors!",
+        "I like all colors equally.",
+        "Colors are all beautiful in their own way!"
+      ]
+    },
+    {
+      "tag": "music",
+      "patterns": [
+        "Do you like music?",
+        "What's your favorite song?",
+        "Can you play some music?"
+      ],
+      "responses": [
+        "I don't listen to music, but I can help you find some!",
+        "I don't have ears, but music is great!",
+        "Music is wonderful, isn't it?"
+      ]
+    },
+    {
+      "tag": "hobbies",
+      "patterns": [
+        "Do you have any hobbies?",
+        "What do you do for fun?",
+        "How do you spend your time?"
+      ],
+      "responses": [
+        "I enjoy helping people like you.",
+        "I'm always here to assist you.",
+        "I don't have hobbies, but I love answering your questions!"
+      ]
+    },
+    {
+      "tag": "sports",
+      "patterns": [
+        "Do you like sports?",
+        "What's your favorite sport?",
+        "Do you play any sports?"
+      ],
+      "responses": [
+        "I don't play sports, but I can provide information about them.",
+        "Sports are great! Which one do you like?",
+        "I can help you find information on various sports."
+      ]
+    },
+    {
+      "tag": "book",
+      "patterns": [
+        "Do you like reading?",
+        "What's your favorite book?",
+        "Can you recommend a book?"
+      ],
+      "responses": [
+        "Books are amazing! What genre do you like?",
+        "I can help you find popular books.",
+        "Reading is a great way to learn new things!"
+      ]
+    },
+    {
+      "tag": "movies",
+      "patterns": [
+        "Do you like movies?",
+        "What's your favorite movie?",
+        "Can you recommend a movie?"
+      ],
+      "responses": [
+        "Movies are a great form of entertainment!",
+        "I can suggest some popular movies.",
+        "What genre of movies do you enjoy?"
+      ]
+    },
+    {
+      "tag": "food",
+      "patterns": [
+        "What's your favorite food?",
+        "Do you eat?",
+        "Can you recommend a restaurant?"
+      ],
+      "responses": [
+        "I don't eat, but I can help you find great places to eat!",
+        "I can suggest some popular cuisines.",
+        "What type of food do you like?"
+      ]
+    },
+    {
+      "tag": "place",
+      "patterns": [
+        "What's your favorite place?",
+        "Do you travel?",
+        "Where is a good place to visit?"
+      ],
+      "responses": [
+        "I don't travel, but I can help you find travel destinations!",
+        "There are many beautiful places to explore.",
+        "What kind of places do you like to visit?"
+      ]
+    },
+    {
+      "tag": "help",
+      "patterns": [
+        "Can you help me?",
+        "I need assistance",
+        "Can you assist me?"
+      ],
+      "responses": [
+        "Of course! How can I assist you today?",
+        "I'm here to help. What do you need?",
+        "Sure! What can I do for you?"
+      ]
+    },
+    {
+      "tag": "bot",
+      "patterns": ["Are you a bot?", "What are you?", "Are you human?"],
+      "responses": [
+        "Yes, I am a chatbot.",
+        "I am an AI assistant created by OpenAI.",
+        "I am here to help you as a virtual assistant."
+      ]
+    },
+    {
+      "tag": "greeting",
+      "patterns": ["Hello", "Hi", "Hey", "Greetings", "What's up?", "Howdy"],
+      "responses": [
+        "Hello!",
+        "Hi there!",
+        "Greetings!",
+        "Hey!",
+        "How can I assist you today?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Goodbye",
+        "Bye",
+        "See you later",
+        "Take care",
+        "Catch you later"
+      ],
+      "responses": [
+        "Goodbye!",
+        "See you later!",
+        "Take care!",
+        "Bye! Have a great day!"
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "I appreciate it",
+        "Thanks a lot",
+        "Thanks so much"
+      ],
+      "responses": [
+        "You're welcome!",
+        "No problem!",
+        "My pleasure!",
+        "Anytime!",
+        "Glad to help!"
+      ]
+    },
+    {
+      "tag": "no_response",
+      "patterns": [" ", "I don't know", "No idea", "Not sure"],
+      "responses": [
+        "Can you please elaborate?",
+        "I didn't quite catch that.",
+        "Could you say that again?",
+        "I'm here to help, can you give me more details?"
+      ]
+    },
+    {
+      "tag": "name",
+      "patterns": [
+        "What's your name?",
+        "Who are you?",
+        "Can you tell me your name?"
+      ],
+      "responses": [
+        "I am a chatbot.",
+        "I am your virtual assistant.",
+        "I'm here to help you!"
+      ]
+    },
+    {
+      "tag": "age",
+      "patterns": [
+        "How old are you?",
+        "What's your age?",
+        "When were you created?"
+      ],
+      "responses": [
+        "I am timeless.",
+        "I exist in the digital realm.",
+        "I was created by OpenAI."
+      ]
+    },
+    {
+      "tag": "how_are_you",
+      "patterns": ["How are you?", "How's it going?", "How do you feel?"],
+      "responses": [
+        "I'm just a bunch of code, but I'm here to help you!",
+        "I'm doing great, thanks for asking!",
+        "Ready to assist you!"
+      ]
+    },
+    {
+      "tag": "jokes",
+      "patterns": ["Tell me a joke", "Do you know any jokes?", "Make me laugh"],
+      "responses": [
+        "Why don't scientists trust atoms? Because they make up everything!",
+        "What do you get if you cross a snowman and a vampire? Frostbite!",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!"
+      ]
+    },
+    {
+      "tag": "creator",
+      "patterns": [
+        "Who created you?",
+        "Who is your creator?",
+        "Who built you?"
+      ],
+      "responses": [
+        "I was created by OpenAI.",
+        "OpenAI developed me.",
+        "I am a product of OpenAI."
+      ]
+    },
+    {
+      "tag": "date",
+      "patterns": [
+        "What's the date?",
+        "Can you tell me today's date?",
+        "What is today's date?"
+      ],
+      "responses": [
+        "I'm not sure of the exact date, but your device should have that information.",
+        "Please check the date on your device.",
+        "I recommend using a calendar app for the current date."
+      ]
+    },
+    {
+      "tag": "favorite_color",
+      "patterns": [
+        "What's your favorite color?",
+        "Do you have a favorite color?",
+        "What's the best color?"
+      ],
+      "responses": [
+        "I don't have preferences, but I can tell you about colors!",
+        "I like all colors equally.",
+        "Colors are all beautiful in their own way!"
+      ]
+    },
+    {
+      "tag": "music",
+      "patterns": [
+        "Do you like music?",
+        "What's your favorite song?",
+        "Can you play some music?"
+      ],
+      "responses": [
+        "I don't listen to music, but I can help you find some!",
+        "I don't have ears, but music is great!",
+        "Music is wonderful, isn't it?"
+      ]
+    },
+    {
+      "tag": "hobbies",
+      "patterns": [
+        "Do you have any hobbies?",
+        "What do you do for fun?",
+        "How do you spend your time?"
+      ],
+      "responses": [
+        "I enjoy helping people like you.",
+        "I'm always here to assist you.",
+        "I don't have hobbies, but I love answering your questions!"
+      ]
+    },
+    {
+      "tag": "sports",
+      "patterns": [
+        "Do you like sports?",
+        "What's your favorite sport?",
+        "Do you play any sports?"
+      ],
+      "responses": [
+        "I don't play sports, but I can provide information about them.",
+        "Sports are great! Which one do you like?",
+        "I can help you find information on various sports."
+      ]
+    },
+    {
+      "tag": "book",
+      "patterns": [
+        "Do you like reading?",
+        "What's your favorite book?",
+        "Can you recommend a book?"
+      ],
+      "responses": [
+        "Books are amazing! What genre do you like?",
+        "I can help you find popular books.",
+        "Reading is a great way to learn new things!"
+      ]
+    },
+    {
+      "tag": "movies",
+      "patterns": [
+        "Do you like movies?",
+        "What's your favorite movie?",
+        "Can you recommend a movie?"
+      ],
+      "responses": [
+        "Movies are a great form of entertainment!",
+        "I can suggest some popular movies.",
+        "What genre of movies do you enjoy?"
+      ]
+    },
+    {
+      "tag": "food",
+      "patterns": [
+        "What's your favorite food?",
+        "Do you eat?",
+        "Can you recommend a restaurant?"
+      ],
+      "responses": [
+        "I don't eat, but I can help you find great places to eat!",
+        "I can suggest some popular cuisines.",
+        "What type of food do you like?"
+      ]
+    },
+    {
+      "tag": "place",
+      "patterns": [
+        "What's your favorite place?",
+        "Do you travel?",
+        "Where is a good place to visit?"
+      ],
+      "responses": [
+        "I don't travel, but I can help you find travel destinations!",
+        "There are many beautiful places to explore.",
+        "What kind of places do you like to visit?"
+      ]
+    },
+    {
+      "tag": "help",
+      "patterns": [
+        "Can you help me?",
+        "I need assistance",
+        "Can you assist me?"
+      ],
+      "responses": [
+        "Of course! How can I assist you today?",
+        "I'm here to help. What do you need?",
+        "Sure! What can I do for you?"
+      ]
+    },
+    {
+      "tag": "bot",
+      "patterns": ["Are you a bot?", "What are you?", "Are you human?"],
+      "responses": [
+        "Yes, I am a chatbot.",
+        "I am an AI assistant created by OpenAI.",
+        "I am here to help you as a virtual assistant."
+      ]
+    },
+    {
+      "tag": "flights",
+      "patterns": [
+        "I need to book a flight",
+        "Can you book a flight?",
+        "Help me book a flight"
+      ],
+      "responses": [
+        "Sure, I can help with that. Do you need a oneway or roundtrip flight?",
+        "I'd be happy to assist with booking your flight. Is it a oneway or roundtrip?"
+      ]
+    },
+    {
+      "tag": "hotel",
+      "patterns": [
+        "I need to book a hotel",
+        "Can you book a hotel?",
+        "Help me find a hotel"
+      ],
+      "responses": [
+        "I'd be happy to help you find a hotel. Where are you traveling to?",
+        "Sure, I can help with booking a hotel. What's your destination?"
+      ]
+    },
+    {
+      "tag": "restaurants",
+      "patterns": [
+        "Can you recommend a restaurant?",
+        "Where should I eat?",
+        "Suggest a place to eat"
+      ],
+      "responses": [
+        "What type of cuisine are you in the mood for?",
+        "I can suggest some great places to eat. What kind of food do you like?",
+        "Tell me what type of food you're looking for, and I can recommend a place."
+      ]
+    },
+    {
+      "tag": "news",
+      "patterns": [
+        "What's the latest news?",
+        "Tell me the news",
+        "What's happening in the world?"
+      ],
+      "responses": [
+        "I recommend checking a news website or app for the latest updates.",
+        "You can find the latest news on various news websites.",
+        "For current events, please check your preferred news source."
+      ]
+    },
+    {
+      "tag": "languages",
+      "patterns": [
+        "How many languages do you speak?",
+        "Can you speak other languages?",
+        "What languages can you understand?"
+      ],
+      "responses": [
+        "I can understand and respond in multiple languages. Which language would you like to use?",
+        "I support several languages. How can I assist you?",
+        "I can communicate in many languages. Which one do you prefer?"
+      ]
+    },
+    {
+      "tag": "tech_support",
+      "patterns": [
+        "I need tech support",
+        "Can you help me with my computer?",
+        "My device isn't working"
+      ],
+      "responses": [
+        "I can try to help. What's the issue with your device?",
+        "Sure, I can assist with tech support. What's the problem"
+      ]
+    }
+  ]
+}
