@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/HomePage.css";
 import Header from "../Components/Header";
-import SignUpImage from "../Pictures/h1-rom-lon-was-collage-hn.jpg"
+import SignUpImage from "../Pictures/signup.jpg"
 
 const HomePage = () => {
   return (

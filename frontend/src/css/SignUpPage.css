@@ -4,6 +4,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    /* Ensure the header is above the form */
+    /* Ensure the header is above the form */
+    background-color: #F2F3FA;
+}
+
+.Footer{
+    padding-top: 10%;
+  background-color: white;  
 }
 
 .header {
@@ -12,9 +20,7 @@ body {
     padding: 20px;
     text-align: center;
     position: relative;
-    /* Set the position to relative */
     z-index: 2;
-    /* Ensure the header is above the form */
 }
 
 .floating-form {

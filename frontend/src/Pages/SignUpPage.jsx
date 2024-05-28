@@ -3,6 +3,7 @@ import axios from "axios";
 import signupImageUrl from "../Pictures/signup.jpg";
 import Header from "../Components/Header";
 import "../css/SignUpPage.css";
+import Footer from "../Components/Footer";
 
 function App() {
   const [firstName, setFirstName] = useState("");
@@ -122,6 +123,7 @@ function App() {
           <button type="submit">Sign Up</button>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 }

@@ -50,11 +50,26 @@ const Header = ({ imageUrl }) => {
       <div className="write">
       <h1>
         <ul>
-        <li>Experience the ultimate in</li>
-        <li>Premium travel</li>
+        <li>Life Is Short And</li>
+        <li>The Wold is Wide!</li>
       </ul>
       </h1>
+      <h3>
+        <ul>
+          <li>
+            To get the best of your adventure you just need to  leave and
+          </li>
+          <li>
+            go where you like. We are waiting for you.
+          </li>
+        </ul>
+      </h3>
       </div>
+          <button className="button" type="submit">
+            <Link to="/signup" className="link">
+            Try For Free
+            </Link>
+            </button>
     </header>
   );
 };

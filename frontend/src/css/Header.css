@@ -18,13 +18,13 @@ header img{
 header .container {
   display: flex;
   align-items: center;
-  padding-left: 300px;
+  padding-left: 100px;
 }
 
 header nav ul {
   display: flex;
   list-style: none;
-  margin-left: 300px;
+  margin-left: 100px;
   align-items: center;
 }
 
@@ -47,7 +47,7 @@ header nav ul h2,
 header nav ul h3{
   display: flex;
   list-style: none;
-  margin-left: 100px;
+  margin-left: 400px;
 }
 
 header nav ul li a {
@@ -55,13 +55,37 @@ header nav ul li a {
   color: white;
 }
 header .write h1{
-  padding-left: 300px;
+  padding-left: 100px;
   font-family: 'Times New Roman', Times, serif;
-  padding-top: 15px;
+  margin: 0px;
+  margin-bottom: 0px;
+}
+
+header .write h3 {
+  padding-left: 100px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top:0px;
 }
 
 header .write ul li{
   flex: 0 0 calc(33.33% - 10px);
-  margin-bottom: 5px;
   list-style-type: none;
+}
+
+header .button{
+      background-color: #737375;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
+      margin-left: 150px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+}
+
+header .button:hover{
+  background-color: #f9f9fa;
 }
