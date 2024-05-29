@@ -76,10 +76,11 @@ def login():
     params = request.get_json()
     email = params.get("email")
     password = params.get("password")
-
-    user = db.users.find_one({"email": email})
-    if user and user["password"] == password:
-        return {"message": "Login successful"}, 200
+    
+    user = db.users.find_one({"email": email,"password" : password})
+    user['_id'] = str(user['_id'])
+    if user:
+        return {"message": "Login successful","user":user}, 200
     return {"message": "Invalid email or password"}, 401
 
 

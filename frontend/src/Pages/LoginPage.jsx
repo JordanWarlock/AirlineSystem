@@ -15,9 +15,14 @@ const LoginPage = () => {
   const authenticateUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/login", { email, password });
-      setErrorMessage(""); // Clear any previous error messages
-      navigate("/"); // Navigate to the home page or another route upon successful login
+      const response = await axios.post("http://localhost:5000/api/login", {
+        email,
+        password,
+      });
+
+      sessionStorage.setItem("userInfo", JSON.stringify(response.data["user"]));
+      setErrorMessage("");
+      navigate("/");
     } catch (error) {
       if (error.response && error.response.status === 401) {
         setErrorMessage("Invalid email or password");
@@ -33,18 +38,18 @@ const LoginPage = () => {
       <div className="floating-form">
         <h1>Login</h1>
         <form onSubmit={authenticateUser}>
-          <input 
+          <input
             type="email"
             placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)} 
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <input 
+          <input
             type="password" // Changed from "text" to "password" for security
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)} 
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button type="submit">Login</button>

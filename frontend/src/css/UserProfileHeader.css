@@ -1,0 +1,14 @@
+.user-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-size: clamp(14px, 1vw, 18px);
+}
+
+.user-summary img {
+  width: clamp(40px, 10%, 100px);
+  height: clamp(40px, 10%, 100px);
+  border-radius: clamp(20px, 50%, 50px);
+  background: transparent;
+}
