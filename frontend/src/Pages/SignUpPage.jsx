@@ -82,7 +82,6 @@ const [generalError, setGeneralError] = useState("");
             }}
             required
           />
-          {emailError && <p className="error">{emailError}</p>}
           <input
             type="number"
             placeholder="Age"

@@ -4,7 +4,10 @@ import Header from "../Components/Header";
 import SignUpImage from "../Pictures/signup.jpg"
 import BookingPage from "../Pages/BookingPage"
 import MainPageComponent from "../Components/MainPageComponent";
-import AgencyInfo from "../Components/AgencyInfo";
+import AgencyInfo from "../Components/AgencyInfo"; 
+import HomeEmail from "../Components/HomeEmail";
+import Footer from "../Components/Footer"
+
 
 const HomePage = () => {
   return (
@@ -13,6 +16,8 @@ const HomePage = () => {
       <BookingPage/>
       <MainPageComponent/>
       <AgencyInfo/>
+      <HomeEmail/>
+      <Footer/>
     </div>
   );
 };

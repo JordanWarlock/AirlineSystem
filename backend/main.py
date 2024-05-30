@@ -71,6 +71,21 @@ def setSignupData():
     })
     return "User Added Successfully", 201
 
+@app.route("/api/email", methods=["POST"])
+def setEmailData():
+    params = request.get_json()
+    email = params.get("email")
+
+    existing_user = db.Email.find_one({"email": email})
+    if existing_user:
+        return "Email already registered", 400  
+
+    
+    db.Email.insert_one({
+        "email": email,
+    })
+    return "User Added Successfully", 201
+
 @app.route("/api/login", methods=["POST"])
 def login():
     params = request.get_json()
