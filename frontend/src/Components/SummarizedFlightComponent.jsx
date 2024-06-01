@@ -30,40 +30,48 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
       e.target.innerHTML = "View Details";
     }
   };
+  const handleBooking = (e) => {};
 
   return (
-    <div className="single-flight-data">
-      {segments.map((segment, index) => (
-        <div className="summary" key={index}>
-          <div className="carrier-data">
-            <img
-              src={segment.legs[0].carriersData[0].logo}
-              alt={segment.legs[0].carriersData[0].name}
-            />
-            <p>{segment.legs[0].carriersData[0].name}</p>
-          </div>
+    <>
+      <div className="single-flight-data">
+        <div className="segments">
+          {segments.map((segment, index) => (
+            <div className="summary" key={index}>
+              <div className="carrier-data">
+                <img
+                  src={segment.legs[0].carriersData[0].logo}
+                  alt={segment.legs[0].carriersData[0].name}
+                />
+                <p>{segment.legs[0].carriersData[0].name}</p>
+              </div>
 
-          <p>{`${getLocaleDateTime(segment.departureTime).time} - ${
-            getLocaleDateTime(segment.arrivalTime).time
-          }`}</p>
-          <p>
-            {Math.floor(segment.totalTime / 3600)}h{":"}
-            {Math.floor((segment.totalTime % 3600) / 60)}m
-          </p>
+              <p>{`${getLocaleDateTime(segment.departureTime).time} - ${
+                getLocaleDateTime(segment.arrivalTime).time
+              }`}</p>
+              <p>
+                {Math.floor(segment.totalTime / 3600)}h{":"}
+                {Math.floor((segment.totalTime % 3600) / 60)}m
+              </p>
+            </div>
+          ))}
         </div>
-      ))}
-      <p>{"Price : " + getPrice(total) + " " + currency}</p>
-      <button onClick={(e) => handleViewDetails(e)}>View Details</button>
-      {showDetails && (
-        <div className="details">
+        <div className="price-actions">
+          <p>{"Price : " + getPrice(total) + " " + currency}</p>
+          <button onClick={(e) => handleViewDetails(e)}>View Details</button>
+          <button onClick={(e) => handleBooking(e)}>Book</button>
+        </div>
+      </div>
+      <div className="details">
+        {showDetails && (
           <DetailedFlightResult
             flight={flight}
             getPrice={getPrice}
             currency={currency}
           />
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

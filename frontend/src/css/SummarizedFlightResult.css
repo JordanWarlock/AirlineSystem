@@ -1,29 +1,54 @@
+.flight-result-container {
+  padding: 0 15%;
+}
+
 .single-flight-data {
   border: 1px solid;
   border-radius: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 160px;
+  gap: 40px;
+  padding: 20px 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+  margin: 10px 0;
+  align-items: center;
+}
+
+.segments {
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+.price-actions {
+  grid-column: span 1;
+  grid-row: span 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .summary {
   display: flex;
   align-items: center;
   gap: 20px;
-  justify-content: center;
+  justify-content: space-between;
   font-size: clamp(14px, 1vw, 20px);
 }
 
 .carrier-data {
-  font-size: 1em;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  width: 100px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .carrier-data img {
-  width: 30%;
-  height: 30%;
+  width: 30px;
+  height: 30px;
 }

@@ -136,8 +136,7 @@ h4 {
   background: linear-gradient(45deg, #f16aa9, #4d66d3);
 }
 
-.dashboard-card h2,
-p {
+.dashboard-card h2 p {
   text-align: center;
   margin: 0;
 }
