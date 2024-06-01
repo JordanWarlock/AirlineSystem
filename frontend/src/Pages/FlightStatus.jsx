@@ -2,81 +2,99 @@ import React, { useState } from 'react';
 import Header from '../Components/Header';
 import headerimage from "../Pictures/h1-rom-lon-was-collage-hn.jpg"
 import '../css/FlightStatus.css';
+import axios from 'axios';
 
 const FlightStatus = () => {
-    const [searchType, setSearchType] = useState('flightNumber');
+    
     const [flightNumber, setFlightNumber] = useState('');
-    const [route, setRoute] = useState({ from: '', to: '' });
     const [date, setDate] = useState(new Date().toISOString().substring(0, 10));
     const [flightDetails, setFlightDetails] = useState(null);
+    const [carrierCode, setCarrierCode] = useState("");
+    
 
-    const handleSearch = () => {
+    const handleSearch = async() => {
         // Fetch flight details based on searchType, flightNumber, route, and date
         // For now, we'll mock the flight details response
+        try{
         const details = {
-            flightNumber: 'EK123',
-            status: 'On Time',
-            departure: '10:00 AM',
-            arrival: '02:00 PM'
+            flightNumber: flightNumber,
+            carrierCode: carrierCode,
+            departureDate: date,
+          
         };
-        setFlightDetails(details);
+        const response = await axios.post("http://localhost:5000/api/flighstatus" , details) 
+        setFlightDetails(response.data);
+        console.log(response.data)
+    }
+    catch(err){console.error(err)}
     };
 
     return (
         <div>
-            <Header imageUrl={headerimage} />
-            <div className="flight-status">
-                <h1>Flight Status</h1>
-                <p>Check the status of any Emirates flight, and sign up for future alerts.</p>
-                <div className="search-options">
-                    <button onClick={() => setSearchType('flightNumber')} className={searchType === 'flightNumber' ? 'active' : ''}>Flight number</button>
-                    <button onClick={() => setSearchType('route')} className={searchType === 'route' ? 'active' : ''}>Route</button>
-                </div>
-                {searchType === 'flightNumber' ? (
-                    <div className="input-group">
-                        <input 
-                            type="text" 
-                            placeholder="Flight number" 
-                            value={flightNumber} 
-                            onChange={(e) => setFlightNumber(e.target.value)} 
-                        />
-                    </div>
-                ) : (
-                    <div className="input-group">
-                        <input 
-                            type="text" 
-                            placeholder="Leaving from" 
-                            value={route.from} 
-                            onChange={(e) => setRoute({ ...route, from: e.target.value })} 
-                        />
-                        <input 
-                            type="text" 
-                            placeholder="Going to" 
-                            value={route.to} 
-                            onChange={(e) => setRoute({ ...route, to: e.target.value })} 
-                        />
-                    </div>
-                )}
-                <div className="input-group">
-                    <input 
-                        type="date" 
-                        value={date} 
-                        onChange={(e) => setDate(e.target.value)} 
-                    />
-                </div>
-                <button onClick={handleSearch} className="view-details">View details</button>
-                {flightDetails && (
-                    <div className="flight-details">
-                        <h2>Flight Details</h2>
-                        <p>Flight Number: {flightDetails.flightNumber}</p>
-                        <p>Status: {flightDetails.status}</p>
-                        <p>Departure: {flightDetails.departure}</p>
-                        <p>Arrival: {flightDetails.arrival}</p>
-                    </div>
-                )}
+          <Header imageUrl={headerimage} />
+          <div className="flight-status">
+            <h1>Flight Status</h1>
+            <p>Check the status of any Emirates flight and sign up for future alerts.</p>
+            
+            <div className="input-group">
+              <input 
+                type="text" 
+                placeholder="Enter Flight Number" 
+                value={flightNumber} 
+                onChange={(e) => setFlightNumber(e.target.value)} 
+              />
             </div>
+            <div className="input-group">
+              <input 
+                type="text" 
+                placeholder="Enter Carrier Code" 
+                value={carrierCode} 
+                onChange={(e) => setCarrierCode(e.target.value)} 
+              />
+            </div>
+            <div className="input-group">
+              <input 
+                type="date" 
+                value={date} 
+                onChange={(e) => setDate(e.target.value)} 
+              />
+            </div>
+      
+            <button onClick={handleSearch} className="view-details">View Details</button>
+      
+            {flightDetails && (
+              <div className="flight-details">
+                <h2>Flight Details</h2>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Flight Number:</td>
+                      <td>{flightDetails.data.flightId}</td>
+                    </tr>
+                    <tr>
+                      <td>Status:</td>
+                      <td>{flightDetails.data.status.status}</td>
+                    </tr>
+                    <tr>
+                      <td>Departure:</td>
+                      <td>{flightDetails.data.departureAirport.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Arrival:</td>
+                      <td>{flightDetails.data.arrivalAirport.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Flight Duration:</td>
+                      <td>{flightDetails.data.additionalFlightInfo.flightDuration}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
         </div>
-    );
+      );
+      
 };
 
 export default FlightStatus;
