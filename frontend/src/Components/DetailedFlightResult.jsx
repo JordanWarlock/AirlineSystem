@@ -21,7 +21,7 @@ const DetailedFlightResult = ({ flight, currency, getPrice }) => {
                   className="airline-logo"
                 />
                 <div className="flight-number">
-                  <strong>Flight Number:</strong> {leg.flightInfo.flightNumber}
+                  <strong>Flight Number:</strong> {leg.flightInfo.carrierInfo.operatingCarrier+" "+leg.flightInfo.flightNumber}
                 </div>
               </div>
               <div className="flight-info">

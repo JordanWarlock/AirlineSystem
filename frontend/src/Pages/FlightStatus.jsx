@@ -38,19 +38,20 @@ const FlightStatus = () => {
             <div className="input-group">
               <input
                 type="text"
-                placeholder="Flight number"
-                value={flightNumber}
-                onChange={(e) => setFlightNumber(e.target.value)}
-              />
-            </div>
-            <div className="input-group">
-              <input
-                type="text"
                 placeholder="Carrier Code"
                 value={carrierCode}
                 onChange={(e) => setCarrierCode(e.target.value)}
               />
             </div>
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Flight number"
+                value={flightNumber}
+                onChange={(e) => setFlightNumber(e.target.value)}
+              />
+            </div>
+            
             <div className="input-group">
               <input
                 type="date"

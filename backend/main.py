@@ -137,6 +137,7 @@ def getResponse():
 @app.route("/api/flighstatus", methods=["POST"])
 def getStatus():
     data= request.get_json()
+    print (data)
     flightNumber = data.get("flightNumber")
     carrierCode = data.get("carrierCode")
     departureDate = data.get("departureDate")
