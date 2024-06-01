@@ -9,6 +9,24 @@ const FlightResultPage = () => {
   const [currentRate, setCurrentRate] = useState(1);
   const [allRates, setAllRates] = useState([]);
 
+  const resultsPerPage = 5;
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastResult = currentPage * resultsPerPage;
+  const indexOfFirstResult = indexOfLastResult - resultsPerPage;
+  const currentResults = flightResults.flightOffers.slice(
+    indexOfFirstResult,
+    indexOfLastResult
+  );
+
+  const nextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const previousPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
   // const isMoreThan24HoursApart = (dateString1, dateString2) => {
   //   const date1 = new Date(dateString1);
   //   const date2 = new Date(dateString2);
@@ -45,7 +63,7 @@ const FlightResultPage = () => {
     // eslint-disable-next-line
   }, [currency]);
   return (
-    <div>
+    <div className="flight-result-container">
       <h1>Flight Results</h1>
       <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
         {Object.keys(allRates).map((rate, index) => (
@@ -57,15 +75,30 @@ const FlightResultPage = () => {
       {flightResults["error"] ? (
         <p>Sorry An Error Occured</p>
       ) : (
-        flightResults.flightOffers.map((flight, index) => (
+        currentResults.map((flight, index) => (
           <SummarizedFlightResult
             key={index}
             flight={flight}
             rate={currentRate}
             currency={currency}
+            currentPage={currentPage}
+            resultsPerPage={resultsPerPage}
+            nextPage={nextPage}
+            previousPage={previousPage}
           />
         ))
       )}
+      <div className="pagination">
+        <button onClick={previousPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <button
+          onClick={nextPage}
+          disabled={indexOfLastResult >= flightResults.flightOffers.length}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

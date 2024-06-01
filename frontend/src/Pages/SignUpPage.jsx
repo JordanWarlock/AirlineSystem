@@ -6,7 +6,6 @@ import "../css/SignUpPage.css";
 import Footer from "../Components/Footer";
 import { useNavigate } from "react-router-dom";
 
-
 function App() {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
@@ -18,16 +17,15 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfrimPassword] = useState("");
-    const [emailError, setEmailError] = useState("");
-const [generalError, setGeneralError] = useState("");
-    
+  const [emailError, setEmailError] = useState("");
+  const [generalError, setGeneralError] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setGeneralError("Passwords do not match");
       return;
     }
-
 
     const user = {
       firstName: firstName,
@@ -40,7 +38,11 @@ const [generalError, setGeneralError] = useState("");
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/api/signup", user);
+      // eslint-disable-next-line
+      const response = await axios.post(
+        "http://localhost:5000/api/signup",
+        user
+      );
       setGeneralError("");
       navigate("/");
     } catch (error) {
@@ -78,7 +80,7 @@ const [generalError, setGeneralError] = useState("");
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              setEmailError(""); 
+              setEmailError("");
             }}
             required
           />
@@ -110,9 +112,10 @@ const [generalError, setGeneralError] = useState("");
             type="password"
             placeholder="Password"
             value={password}
-            onChange={(e) => {setPassword(e.target.value);
-              setGeneralError("");}
-            }
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setGeneralError("");
+            }}
             required
           />
 
@@ -120,7 +123,8 @@ const [generalError, setGeneralError] = useState("");
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
-            onChange={(e) => {setConfrimPassword(e.target.value);
+            onChange={(e) => {
+              setConfrimPassword(e.target.value);
               setGeneralError("");
             }}
             required
@@ -139,7 +143,7 @@ const [generalError, setGeneralError] = useState("");
           <button type="submit">Sign Up</button>
         </form>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
