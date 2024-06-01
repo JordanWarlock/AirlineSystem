@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/Header.css";
 import { Link } from "react-router-dom";
 import UserProfileHeader from "./UserProfileHeader";
 
 const Header = ({ imageUrl }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header style={{ backgroundImage: `url(${imageUrl})` }}>
       <nav>

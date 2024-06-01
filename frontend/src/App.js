@@ -7,6 +7,7 @@ import FlightResult from "../src/Pages/FlightResultPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage";
 import UserProfilePage from "./Pages/UserProfilePage";
+import FlightStatus from "./Pages/FlightStatus";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/flightResults" element={<FlightResult />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<UserProfilePage />} />
+        <Route path="/flightstatus" element={<FlightStatus />} />
       </Routes>
     </Router>
   );

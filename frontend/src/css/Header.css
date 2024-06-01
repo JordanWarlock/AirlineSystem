@@ -5,7 +5,8 @@
 
 header {
   background-size: cover;
-  height: 450px;
+  background-position: center;
+  padding: 20px;
   position: relative;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
@@ -14,13 +15,21 @@ header img {
   filter: brightness(70%);
 }
 
-header .container {
+nav ul.main-nav {
+  list-style: none;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 0;
+  margin: 0;
   padding-left: 100px;
 }
 
-header nav ul {
+nav ul.main-nav h1,
+nav ul.main-nav h2,
+nav ul.main-nav h3 {
+  margin: 0;
+  padding: 0;
   display: flex;
   list-style: none;
   margin-left: 100px;

@@ -8,6 +8,7 @@ import Footer from "../Components/Footer";
 
 const Help = () => {
   const [chats, setChats] = useState([]);
+  const [conversationState, setConversationState] = useState({});
   const chatSpaceRef = useRef(null);
   const fetchAIResponse = async (chat) => {
     try {
@@ -16,6 +17,7 @@ const Help = () => {
         chat
       );
       setChats((prevChats) => [...prevChats, response.data]);
+      setConversationState(response.data.conversation_state);
     } catch (err) {
       console.error(err);
     }
@@ -27,6 +29,7 @@ const Help = () => {
         const chat = {
           message: e.target.value,
           type: "Human",
+          conversation_state: conversationState,
         };
         setChats((prevChats) => [...prevChats, chat]);
         fetchAIResponse(chat);
