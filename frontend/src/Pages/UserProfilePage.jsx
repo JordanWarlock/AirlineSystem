@@ -41,7 +41,7 @@ const UserProfilePage = () => {
               onClick={() => handleClick(1)}
             >
               <i className="fa-solid fa-plane"></i>
-              <p>Flights</p>
+              <p>Bookings</p>
             </li>
           </ul>
         </div>

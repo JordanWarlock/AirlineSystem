@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   LineChart,
   Line,
@@ -9,8 +10,11 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import BookingDetails from "./BookingDetails";
 
 const UserDashboard = () => {
+  const [bookings, setBookings] = useState([]);
+
   const data = [
     {
       name: "Jan",
@@ -73,6 +77,24 @@ const UserDashboard = () => {
       Bookings: 14,
     },
   ];
+  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
+  const fetchUserBookings = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/bookings/getUserBookings",
+        { userInfo: userInfo._id }
+      );
+      console.log(response.data);
+      setBookings(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserBookings();
+  }, []);
   return (
     <>
       <div className="dashboard-title">Dashboard</div>
@@ -127,7 +149,9 @@ const UserDashboard = () => {
           </ResponsiveContainer>
         </div>
         <div className="dashboard-data">Data</div>
-        <div className="dashboard-bookings">Bookings</div>
+        <div className="dashboard-bookings">
+          <BookingDetails bookings={bookings} />
+        </div>
       </div>
     </>
   );

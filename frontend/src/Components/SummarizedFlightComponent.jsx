@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import DetailedFlightResult from "./DetailedFlightResult";
 import "../css/SummarizedFlightResult.css";
-import { Box } from "@mui/material";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import { Alert, Snackbar } from "@mui/material";
+
 const SummarizedFlightResult = ({ flight, rate, currency }) => {
   const [showDetails, setShowDetails] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
 
+  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
   const {
     segments,
     priceBreakdown: { total },
   } = flight;
+
+  const navigate = useNavigate();
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+    navigate("/login");
+  };
 
   const getLocaleDateTime = (dateTimeString) => {
     const options = { hour: "numeric", minute: "numeric", hour12: true };
@@ -32,7 +44,32 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
       e.target.innerHTML = "View Details";
     }
   };
-  const handleBooking = (e) => {};
+  const handleBooking = async () => {
+    try {
+      if (userInfo) {
+        const payload = {
+          user: userInfo._id,
+          flight: segments,
+          price: getPrice(total),
+          bookingDateTime: new Date(),
+          currency: currency,
+        };
+        const response = await axios.post(
+          "http://localhost:5000/api/bookings",
+          payload
+        );
+
+        alert("Booking made successfully");
+        navigate("/");
+      } else {
+        setAlertOpen(true);
+      }
+    } catch (err) {
+      if (err.response.status === 400) {
+        alert("Booking failed");
+      }
+    }
+  };
 
   return (
     <>
@@ -85,7 +122,7 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
           >
             View Details
           </button>
-          <button className="details-button" onClick={(e) => handleBooking(e)}>
+          <button className="details-button" onClick={handleBooking}>
             Book
           </button>
         </div>
@@ -99,6 +136,19 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
           />
         )}
       </div>
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={3000}
+        onClose={handleAlertClose}
+      >
+        <Alert
+          onClose={handleAlertClose}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Please Login to book. Redirecting....
+        </Alert>
+      </Snackbar>
     </>
   );
 };

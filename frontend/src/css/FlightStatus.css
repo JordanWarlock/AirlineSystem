@@ -5,20 +5,20 @@
   padding: 20px;
   max-width: 100%;
   margin: 0 auto;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: center;
   background-color: #f1f4f8; /* Light background color */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
-h1 {
+.flight-status h1 {
   font-size: 28px;
   color: #333;
   margin-bottom: 10px;
 }
 
-p {
+.flight-status p {
   color: #666;
   margin-bottom: 20px;
 }

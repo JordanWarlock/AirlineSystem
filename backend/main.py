@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS
 from scrapeFlights import get_oneway_flights,get_return_flights,getFlightStatus
 from chatbot.chatbotImplementaion import chatbot_response
-
+from bson import ObjectId
 app = Flask(__name__)
 CORS(app)
 
@@ -112,6 +112,30 @@ def getReturnFlightsData():
 
     data = get_return_flights(departureCode,destinationCode,departureDate,returnDate,passengerCount,cabinClass)
     return jsonify(data)
+
+
+@app.route("/api/bookings",methods=["POST","GET"])
+def getBookings():
+    if request.method == "POST":
+        params = request.get_json()
+        existing_booking = db.bookings.find_one({"user": params.get("user"),"flight": params.get("flight"),"price": params.get("price")})
+        if existing_booking:
+            return "Booking already exists", 400
+        db.bookings.insert_one(params)
+        return "Booking Added Successfully", 201
+    else:
+        bookings = list(db.bookings.find({}))
+        return jsonify(bookings)
+
+
+@app.route("/api/bookings/getUserBookings",methods=["POST"])
+def getUserBookings():
+        params = request.get_json()
+        userId = str(params.get("userInfo"))
+        bookings = list(db.bookings.find({"user": userId}).sort("bookingDateTime", -1))
+        for booking in bookings:
+            booking['_id'] = str(booking['_id'])
+        return jsonify(bookings)
 
 
 @app.route("/api/currencyRates",methods=["GET"])
