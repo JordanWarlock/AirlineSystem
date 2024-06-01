@@ -143,5 +143,48 @@ def getStatus():
     departureDate = data.get("departureDate")
     response = getFlightStatus(carrierCode,flightNumber,departureDate)
     return response
+
+# Admin Console Endpoints
+
+@app.route("/api/admin/searchUser", methods=["POST"])
+def searchUser():
+    data = request.get_json()
+    search_value = data.get("search_value")
+    results = db.users.find(
+    {
+        "$or": [
+            {"_id": search_value},
+            {"firstName": {"$regex": search_value, "$options": "i"}},
+            {"lastName": {"$regex": search_value, "$options": "i"}}
+        ]
+    })
+    users = list(results)
+    for user in users: 
+        user['_id'] = str(user['_id'])
     
+    return jsonify(users)
+
+@app.route("/api/admin/updateUser", methods=["PUT"])
+def updateUser():
+    data = request.get_json()
+    user_id = data.get("userId")
+    update_data = {k: v for k, v in data.items() if k != "userId"}
+    db.users.update_one({"_id": user_id}, {"$set": update_data})
+    return "User Updated Successfully", 200
+
+@app.route("/api/admin/deleteUser", methods=["DELETE"])
+def deleteUser():
+    data = request.get_json()
+    user_id = data.get("userId")
+    db.users.delete_one({"_id": user_id})
+    return "User Deleted Successfully", 200
+
+@app.route("/api/admin/updateFlightStatus", methods=["PUT"])
+def updateFlightStatus():
+    data = request.get_json()
+    user_id = data.get("userId")
+    new_status = data.get("flightStatus")
+    db.users.update_one({"_id": user_id}, {"$set": {"flightStatus": new_status}})
+    return "Flight Status Updated Successfully", 200
+
 app.run(debug=True)

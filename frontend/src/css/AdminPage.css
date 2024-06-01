@@ -1,0 +1,50 @@
+.admin-console {
+    padding: 20px;
+}
+
+.input-group {
+    margin: 10px 0;
+}
+
+.input-group input {
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.input-group button {
+    padding: 10px 20px;
+}
+
+.user-list {
+    margin: 20px 0;
+}
+
+.user-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.user-details {
+    margin-top: 20px;
+}
+
+.user-details h2 {
+    margin-bottom: 20px;
+}
+
+.user-details .input-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.user-details .input-group label {
+    margin-bottom: 5px;
+}
+
+.user-details .input-group input {
+    padding: 10px;
+    margin-bottom: 10px;
+}
