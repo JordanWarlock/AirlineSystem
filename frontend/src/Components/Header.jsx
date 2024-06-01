@@ -22,11 +22,6 @@ const Header = ({ imageUrl }) => {
               </Link>
             </li>
             <li>
-              <Link to="/bookingPage" className="link">
-                Book
-              </Link>
-            </li>
-            <li>
               <Link to="/help" className="link">
                 Help
               </Link>

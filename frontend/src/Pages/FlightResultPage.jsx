@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import SummarizedFlightResult from "../Components/SummarizedFlightComponent";
 import axios from "axios";
+import { Container } from "@mui/material";
 const FlightResultPage = () => {
   const location = useLocation();
   const flightResults = location.state?.flightResults || {};
@@ -27,16 +28,6 @@ const FlightResultPage = () => {
   const previousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
-  // const isMoreThan24HoursApart = (dateString1, dateString2) => {
-  //   const date1 = new Date(dateString1);
-  //   const date2 = new Date(dateString2);
-
-  //   const diffInMs = Math.abs(date2 - date1);
-
-  //   const hoursDiff = diffInMs / (1000 * 60 * 60);
-
-  //   return hoursDiff > 24;
-  // };
 
   const fetchRateFromDB = async () => {
     try {
@@ -56,14 +47,12 @@ const FlightResultPage = () => {
     }
   };
 
-  // const fetchNewRates = () => {};
-
   useEffect(() => {
     fetchRateFromDB();
     // eslint-disable-next-line
   }, [currency]);
   return (
-    <div className="flight-result-container">
+    <Container>
       <h1>Flight Results</h1>
       <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
         {Object.keys(allRates).map((rate, index) => (
@@ -99,7 +88,7 @@ const FlightResultPage = () => {
           Next
         </button>
       </div>
-    </div>
+    </Container>
   );
 };
 

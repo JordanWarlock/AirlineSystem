@@ -1,0 +1,63 @@
+.flight-details {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.flight-details h2 {
+  text-align: center;
+  color: #333;
+}
+
+.segment-details {
+  margin-bottom: 20px;
+}
+
+.leg-details {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.leg-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.airline-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.flight-number {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.flight-info > div {
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.price-details {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.price-details h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.price-details > div {
+  margin-bottom: 5px;
+  color: #666;
+}
+
+strong {
+  color: #333;
+}

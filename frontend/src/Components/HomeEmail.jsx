@@ -10,13 +10,13 @@ const HomeEmail = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const emailData = { email: email };
 
     try {
-      const response = await axios.post("http://localhost:5000/api/email", emailData);
+      await axios.post("http://localhost:5000/api/email", emailData);
       setGeneralError("");
-       alert("Email successfully added!");
+      alert("Email successfully added!");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setEmailError("Email already registered");
@@ -28,7 +28,10 @@ const HomeEmail = () => {
 
   return (
     <div className="header-container">
-      <header className="header-background" style={{ backgroundImage: `url(${image})` }}>
+      <header
+        className="header-background"
+        style={{ backgroundImage: `url(${image})` }}
+      >
         <div className="header-content">
           <h2>Never miss an Offer</h2>
           <h5>Subscribe and be the first to receive our exclusive offers.</h5>

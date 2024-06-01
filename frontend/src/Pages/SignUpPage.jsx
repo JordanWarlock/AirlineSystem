@@ -129,7 +129,11 @@ function App() {
             }}
             required
           />
-          {generalError && <p className="error">{generalError}</p>}
+          {emailError ? (
+            <p className="error">{emailError}</p>
+          ) : (
+            generalError && <p className="error">{generalError}</p>
+          )}
 
           <select
             value={wantOffers}

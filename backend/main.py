@@ -34,6 +34,7 @@ def search():
 @app.route("/api/flightData/oneway",methods=["POST"])
 def getOnewayFlightsData():
     params = request.get_json()
+    print(params)
     departureCode = params.get("departureCode")
     destinationCode = params.get("destinationCode")
     departureDate = params.get("depDate")
