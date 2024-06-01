@@ -1,7 +1,7 @@
 from flask import Flask,request,jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
-from scrapeFlights import get_oneway_flights,get_return_flights
+from scrapeFlights import get_oneway_flights,get_return_flights,getFlightStatus
 from chatbot.chatbotImplementaion import chatbot_response
 
 app = Flask(__name__)
@@ -117,5 +117,13 @@ def getResponse():
 
     return jsonify(payload)
 
-
+@app.route("/api/flighstatus", methods=["POST"])
+def getStatus():
+    data= request.get_json()
+    flightNumber = data.get("flightNumber")
+    carrierCode = data.get("carrierCode")
+    departureDate = data.get("departureDate")
+    response = getFlightStatus(carrierCode,flightNumber,departureDate)
+    return response
+    
 app.run(debug=True)

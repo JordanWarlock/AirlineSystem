@@ -34,34 +34,31 @@ const FlightStatus = () => {
           <Header imageUrl={headerimage} />
           <div className="flight-status">
             <h1>Flight Status</h1>
-            <p>Check the status of any Emirates flight and sign up for future alerts.</p>
-            
+            <p>Check the status of any Emirates flight, and sign up for future alerts.</p>
             <div className="input-group">
-              <input 
-                type="text" 
-                placeholder="Enter Flight Number" 
-                value={flightNumber} 
-                onChange={(e) => setFlightNumber(e.target.value)} 
+              <input
+                type="text"
+                placeholder="Flight number"
+                value={flightNumber}
+                onChange={(e) => setFlightNumber(e.target.value)}
               />
             </div>
             <div className="input-group">
-              <input 
-                type="text" 
-                placeholder="Enter Carrier Code" 
-                value={carrierCode} 
-                onChange={(e) => setCarrierCode(e.target.value)} 
+              <input
+                type="text"
+                placeholder="Carrier Code"
+                value={carrierCode}
+                onChange={(e) => setCarrierCode(e.target.value)}
               />
             </div>
             <div className="input-group">
-              <input 
-                type="date" 
-                value={date} 
-                onChange={(e) => setDate(e.target.value)} 
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
               />
             </div>
-      
-            <button onClick={handleSearch} className="view-details">View Details</button>
-      
+            <button onClick={handleSearch} className="view-details">View details</button>
             {flightDetails && (
               <div className="flight-details">
                 <h2>Flight Details</h2>
@@ -87,14 +84,15 @@ const FlightStatus = () => {
                       <td>Flight Duration:</td>
                       <td>{flightDetails.data.additionalFlightInfo.flightDuration}</td>
                     </tr>
+                    <div className="last-updated"><td>{flightDetails.data.status.lastUpdatedText}</td></div>
                   </tbody>
                 </table>
               </div>
             )}
+            
           </div>
         </div>
       );
-      
-};
+    };
 
 export default FlightStatus;

@@ -72,7 +72,7 @@ const Header = ({ imageUrl }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/help" className="link" onClick={toggleMenu}>
+                <Link to="/contact" className="link" onClick={toggleMenu}>
                   Help
                 </Link>
               </li>

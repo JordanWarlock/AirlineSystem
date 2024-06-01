@@ -1,39 +1,41 @@
 .flight-status {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 20px;
   max-width: 100%;
   margin: 0 auto;
   font-family: 'Roboto', sans-serif;
+  text-align: center;
+  background-color: #f1f4f8; /* Light background color */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 h1 {
-  text-align: center;
-  font-size: 36px;
+  font-size: 28px;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 p {
-  text-align: center;
   color: #666;
+  margin-bottom: 20px;
 }
 
 .input-group {
   margin-bottom: 20px;
-  width: 50%;
-  margin-left: 25%;
+  width: 80%; /* Adjusted width */
+  display: flex;
+  justify-content: center;
 }
 
 .input-group input {
-  width: 50%;
-  
-  padding: 15px;
-  border: none;
-  border-radius: 10px;
-  background-color: #f8f8f8;
+  width: 100%; /* Full width for input */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
@@ -44,15 +46,13 @@ p {
 }
 
 .view-details {
-  display: inline-block;
-  padding: 15px 30px;
-  background-color: #007bff;
+  background-color: red;
   color: white;
+  padding: 10px;
   border: none;
-  border-radius: 10px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 18px;
-  transition: background-color 6s ease;
+  font-size: 16px;
 }
 
 .view-details:hover {
@@ -62,20 +62,23 @@ p {
 .flight-details {
   margin-top: 40px;
   padding: 20px;
-  border-radius: 10px;
-  background-color: #f8f8f8;
+  border-radius: 5px;
+  background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
 }
 
 .flight-details h2 {
   color: #333;
   font-size: 24px;
   margin-bottom: 20px;
-  text-align: center;
 }
 
 .flight-details table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 .flight-details table td {
@@ -85,11 +88,17 @@ p {
 
 .flight-details table td:first-child {
   font-weight: bold;
-  width: 50%;
+  text-align: left;
 }
 
 .flight-details table td:last-child {
   text-align: right;
+}
+
+.last-updated {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
 }
 
 /* Add animation */
@@ -106,32 +115,4 @@ p {
 
 .flight-details {
   animation: fadeInUp 1s ease;
-}
-
-
-.flight-details .detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.flight-details .detail-item p {
-  flex: 1;
-}
-
-.flight-details .detail-item p:first-child {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-/* Animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
