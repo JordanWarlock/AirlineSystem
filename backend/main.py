@@ -125,5 +125,7 @@ def getStatus():
     departureDate = data.get("departureDate")
     response = getFlightStatus(carrierCode,flightNumber,departureDate)
     return response
-    
+
+
+
 app.run(debug=True)
