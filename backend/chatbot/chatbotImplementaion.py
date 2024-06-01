@@ -12,7 +12,7 @@ import os
 
 load_dotenv()
 key = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key="sk-proj-k2xwvpS55HpUoOs94h5pT3BlbkFJ2D46qYAVMBs2PF7TWqLO")
+client = OpenAI(api_key=key)
 
 
 model = tf.keras.models.load_model("chatbot\chatbot_model.keras")
