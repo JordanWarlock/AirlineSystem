@@ -1,118 +1,108 @@
-import React, { useState } from 'react';
-import Header from "../Components/Header";
-import headerimage from "../Pictures/h1-rom-lon-was-collage-hn.jpg";
 import "../css/AdminPage.css";
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const AdminPage = () => {
-    const [searchValue, setSearchValue] = useState('');
-    const [users, setUsers] = useState([]);
+const AdminConsole = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [activePage, setActivePage] = useState('Dashboard');
+    const [searchInput, setSearchInput] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [updateData, setUpdateData] = useState({});
-    const [flightStatus, setFlightStatus] = useState('');
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    const handleItemClick = (page) => {
+        setActivePage(page);
+        if (page === 'Users') {
+            // Clear search input, search results, and selected user when switching to Users page
+            setSearchInput('');
+            setSearchResults([]);
+            setSelectedUser(null);
+        }
+    };
+
+    const handleSearchInputChange = (event) => {
+        setSearchInput(event.target.value);
+    };
 
     const handleSearch = async () => {
         try {
-            const response = await axios.post("http://localhost:5000/api/admin/searchUser", { search_value: searchValue });
-            setUsers(response.data);
-        } catch (err) {
-            console.error(err);
+            const response = await axios.post('http://localhost:5000/api/admin/searchUser', { search_value: searchInput });
+            setSearchResults(response.data);
+            setSelectedUser(null); // Clear selected user when performing a new search
+        } catch (error) {
+            console.error('Error searching for users:', error);
         }
     };
 
-    const handleUserSelect = (user) => {
+    const handleUserClick = (user) => {
         setSelectedUser(user);
-        setUpdateData(user);
-    };
-
-    const handleUpdate = async () => {
-        try {
-            await axios.put("http://localhost:5000/api/admin/updateUser", { userId: selectedUser._id, ...updateData });
-            alert("User updated successfully");
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
-    const handleDelete = async () => {
-        try {
-            await axios.delete("http://localhost:5000/api/admin/deleteUser", { data: { userId: selectedUser._id } });
-            alert("User deleted successfully");
-            setUsers(users.filter(user => user._id !== selectedUser._id));
-            setSelectedUser(null);
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
-    const handleFlightStatusUpdate = async () => {
-        try {
-            await axios.put("http://localhost:5000/api/admin/updateFlightStatus", { userId: selectedUser._id, flightStatus });
-            alert("Flight status updated successfully");
-        } catch (err) {
-            console.error(err);
-        }
     };
 
     return (
-        <div>
-            <Header imageUrl={headerimage} />
-            <div className="admin-console">
-                <h1>Admin Console</h1>
-                <div className="input-group">
-                    <input
-                        type="text"
-                        placeholder="Search by User ID or Name"
-                        value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value)}
-                    />
-                    <button onClick={handleSearch}>Search</button>
+        <div className="admin-container">
+            <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+                <div className="sidebar-header">
+                    <div className="menu-icon" onClick={toggleSidebar}>&#9776;</div>
+                    {isSidebarOpen && <h2>Admin Console</h2>}
                 </div>
-                <div className="user-list">
-                    {users.map(user => (
-                        <div key={user._id} className="user-item" onClick={() => handleUserSelect(user)}>
-                            {user.firstName} {user.lastName}
+                {isSidebarOpen && (
+                    <ul>
+                        <li><a href="#" onClick={() => handleItemClick('Dashboard')}>Dashboard</a></li>
+                        <li><a href="#" onClick={() => handleItemClick('Users')}>Users</a></li>
+                        <li><a href="#" onClick={() => handleItemClick('Bookings')}>Bookings</a></li>
+                        <li><a href="#" onClick={() => handleItemClick('Settings')}>Settings</a></li>
+                    </ul>
+                )}
+            </div>
+            <div className="content">
+                {activePage === 'Dashboard' && (
+                    <>
+                        <h2>Welcome to Dashboard</h2>
+                        <p>This is the dashboard view.</p>
+                    </>
+                )}
+                {activePage === 'Users' && (
+                    <>
+                        <h2>User Search</h2>
+                        <div className="search-container">
+                            <input
+                                type="text"
+                                value={searchInput}
+                                onChange={handleSearchInputChange}
+                                placeholder="Search by username or user ID"
+                            />
+                            <button onClick={handleSearch}>Search</button>
                         </div>
-                    ))}
-                </div>
+                        <div className="search-results">
+                            {searchResults.map(user => (
+                                <div key={user._id} onClick={() => handleUserClick(user)}>
+                                    {user.userName} - {user._id}
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
+                {activePage === 'Bookings' && (
+                    <>
+                        <h2>Welcome to Bookings</h2>
+                        <p>This is the bookings view.</p>
+                    </>
+                )}
+                {activePage === 'Settings' && (
+                    <>
+                        <h2>Change the Settings</h2>
+                        <p>This is the settings view.</p>
+                    </>
+                )}
                 {selectedUser && (
                     <div className="user-details">
                         <h2>User Details</h2>
-                        <div className="input-group">
-                            <label>First Name:</label>
-                            <input
-                                type="text"
-                                value={updateData.firstName}
-                                onChange={(e) => setUpdateData({ ...updateData, firstName: e.target.value })}
-                            />
-                        </div>
-                        <div className="input-group">
-                            <label>Last Name:</label>
-                            <input
-                                type="text"
-                                value={updateData.lastName}
-                                onChange={(e) => setUpdateData({ ...updateData, lastName: e.target.value })}
-                            />
-                        </div>
-                        <div className="input-group">
-                            <label>Email:</label>
-                            <input
-                                type="email"
-                                value={updateData.email}
-                                onChange={(e) => setUpdateData({ ...updateData, email: e.target.value })}
-                            />
-                        </div>
-                        <div className="input-group">
-                            <label>Flight Status:</label>
-                            <input
-                                type="text"
-                                value={flightStatus}
-                                onChange={(e) => setFlightStatus(e.target.value)}
-                            />
-                        </div>
-                        <button onClick={handleUpdate}>Update User</button>
-                        <button onClick={handleDelete}>Delete User</button>
-                        <button onClick={handleFlightStatusUpdate}>Update Flight Status</button>
+                        <p>Username: {selectedUser.userName}</p>
+                        <p>Email: {selectedUser.email}</p>
+                        {/* Add more user details here */}
                     </div>
                 )}
             </div>
@@ -120,4 +110,4 @@ const AdminPage = () => {
     );
 };
 
-export default AdminPage;
+export default AdminConsole;

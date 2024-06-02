@@ -1,50 +1,110 @@
-.admin-console {
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #4846bd;
+    color: #e7e3e3;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.sidebar.open {
+    width: 350px;
     padding: 20px;
 }
 
-.input-group {
-    margin: 10px 0;
+.sidebar.closed {
+    width: 80px; /* Small width to keep the menu icon visible */
+    padding: 20px 0;
 }
 
-.input-group input {
-    padding: 10px;
-    margin-right: 10px;
-}
-
-.input-group button {
-    padding: 10px 20px;
-}
-
-.user-list {
-    margin: 20px 0;
-}
-
-.user-item {
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin: 5px 0;
+.sidebar-header {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-}
-
-.user-details {
-    margin-top: 20px;
-}
-
-.user-details h2 {
     margin-bottom: 20px;
 }
 
-.user-details .input-group {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 0;
-}
-
-.user-details .input-group label {
-    margin-bottom: 5px;
-}
-
-.user-details .input-group input {
+.menu-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
     padding: 10px;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+.sidebar h2 {
+    margin: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
     margin-bottom: 10px;
+}
+
+.sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.content h2 {
+    margin-bottom: 20px;
+}
+
+/* User search styles */
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container input[type="text"] {
+    width: calc(300px + 30%);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.search-container button:hover {
+    background-color: #45a049;
+}
+
+.search-results {
+    /* Add styles for search results here */
 }

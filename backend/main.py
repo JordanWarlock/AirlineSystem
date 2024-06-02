@@ -175,15 +175,15 @@ def searchUser():
     data = request.get_json()
     search_value = data.get("search_value")
     results = db.users.find(
-    {
-        "$or": [
-            {"_id": search_value},
-            {"firstName": {"$regex": search_value, "$options": "i"}},
-            {"lastName": {"$regex": search_value, "$options": "i"}}
-        ]
-    })
+        {
+            "$or": [
+                {"_id": search_value},
+                {"userName": {"$regex": search_value, "$options": "i"}},
+            ]
+        }
+    )
     users = list(results)
-    for user in users: 
+    for user in users:
         user['_id'] = str(user['_id'])
     
     return jsonify(users)
@@ -210,5 +210,8 @@ def updateFlightStatus():
     new_status = data.get("flightStatus")
     db.users.update_one({"_id": user_id}, {"$set": {"flightStatus": new_status}})
     return "Flight Status Updated Successfully", 200
+
+
+
 
 app.run(debug=True)
