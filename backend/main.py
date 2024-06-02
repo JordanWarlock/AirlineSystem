@@ -117,8 +117,11 @@ def getBookings():
             return "Booking failed", 400
         db.bookings.insert_one(params)
         return "Booking Added Successfully", 201
-    else:
+    
+    elif request.method == "GET":
         bookings = list(db.bookings.find({}))
+        for booking in bookings:
+            booking['_id'] = str(booking['_id'])
         return jsonify(bookings)
 
 
@@ -185,17 +188,33 @@ def searchUser():
 @app.route("/api/admin/updateUser", methods=["PUT"])
 def updateUser():
     data = request.get_json()
-    user_id = data.get("userId")
-    update_data = {k: v for k, v in data.items() if k != "userId"}
-    db.users.update_one({"_id": user_id}, {"$set": update_data})
-    return "User Updated Successfully", 200
+    user_id = data.get("user_id")
+    update_fields = {k: v for k, v in data.items() if k != "user_id"}
+    
+    if not user_id or not update_fields:
+        return jsonify({"error": "Invalid request"}), 400
+    
+    result = db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_fields})
+    
+    if result.matched_count == 0:
+        return jsonify({"error": "User not found"}), 404
+    
+    return jsonify({"success": True})
 
 @app.route("/api/admin/deleteUser", methods=["DELETE"])
 def deleteUser():
     data = request.get_json()
-    user_id = data.get("userId")
-    db.users.delete_one({"_id": user_id})
-    return "User Deleted Successfully", 200
+    user_id = data.get("user_id")
+    
+    if not user_id:
+        return jsonify({"error": "Invalid request"}), 400
+    
+    result = db.users.delete_one({"_id": ObjectId(user_id)})
+    
+    if result.deleted_count == 0:
+        return jsonify({"error": "User not found"}), 404
+    
+    return jsonify({"success": True})
 
 @app.route("/api/admin/updateFlightStatus", methods=["PUT"])
 def updateFlightStatus():
@@ -205,6 +224,28 @@ def updateFlightStatus():
     db.users.update_one({"_id": user_id}, {"$set": {"flightStatus": new_status}})
     return "Flight Status Updated Successfully", 200
 
+@app.route("/api/admin/updateBookingStatus", methods=["PUT"])
+def updateBookingStatus():
+    data = request.get_json()
+    bookId = data.get("bookId")
+    new_status = data.get("newStatus")
+
+    if not bookId or not new_status:
+        return jsonify({"error": "Invalid data"}), 400
+
+    try:
+        result = db.bookings.update_one(
+            {"_id": ObjectId(bookId)},
+            {"$set": {"status": new_status}}
+        )
+
+        if result.matched_count == 0:
+            return jsonify({"error": "Booking not found"}), 404
+
+        return jsonify({"message": "Booking Status Updated Successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 
