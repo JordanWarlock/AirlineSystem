@@ -106,5 +106,76 @@ body {
 }
 
 .search-results {
-    /* Add styles for search results here */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.search-results-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(201, 22, 22, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.search-results-item:hover {
+    transform: translateY(-5px);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.user-id {
+    font-size: 14px;
+    color: #666;
+}
+
+.search-results-item:hover  {
+    background-color: rgb(197, 205, 238);
+}
+
+.user-info:hover .user-name {
+    color: rgb(8, 8, 8);
+}
+
+
+.user-details {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-details h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-details p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #666;
+}
+
+.user-details .detail-label {
+    font-weight: bold;
+}
+
+.user-details .detail-value {
+    margin-left: 10px;
+    font-style: italic;
 }
