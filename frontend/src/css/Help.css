@@ -53,3 +53,9 @@ display: inline-block;
   margin: 10px 0px;
   margin-top: auto;
 }
+@media (max-width: 768px){
+  .container h1{
+    font-size: 20px;
+    padding-left: 35% ;
+  }
+}
