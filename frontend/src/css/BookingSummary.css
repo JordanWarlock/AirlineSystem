@@ -1,0 +1,69 @@
+/* BookingDetails.css */
+
+.booking-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+.booking-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  gap: 20px;
+}
+
+.booking-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.booking-number,
+.booking-date,
+.price {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.flight-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.carrier-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.flight-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.flight-info {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.label {
+  font-weight: bold;
+  color: #333;
+}

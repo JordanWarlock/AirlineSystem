@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
   LineChart,
   Line,
@@ -10,11 +8,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import BookingDetails from "./BookingDetails";
+import BookingSummary from "./BookingSummary";
 
-const UserDashboard = () => {
-  const [bookings, setBookings] = useState([]);
-
+const UserDashboard = ({ bookings }) => {
   const data = [
     {
       name: "Jan",
@@ -77,24 +73,32 @@ const UserDashboard = () => {
       Bookings: 14,
     },
   ];
-  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
 
-  const fetchUserBookings = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/bookings/getUserBookings",
-        { userInfo: userInfo._id }
-      );
-      console.log(response.data);
-      setBookings(response.data);
-    } catch (err) {
-      console.error(err);
-    }
+  const countActiveBookings = () => {
+    const currentTime = new Date();
+    const twelveHoursLater = new Date(
+      currentTime.getTime() + 12 * 60 * 60 * 1000
+    );
+
+    // Filter active bookings
+    const activeBookings = bookings.filter((booking) => {
+      const bookingTime = new Date(booking.bookingDateTime);
+      return bookingTime <= twelveHoursLater;
+    });
+
+    return activeBookings.length;
   };
-
-  useEffect(() => {
-    fetchUserBookings();
-  }, []);
+  const getTotalSpent = () => {
+    let total = 0;
+    bookings.forEach((booking) => {
+      const price =
+        typeof booking.price === "string"
+          ? parseFloat(booking.price)
+          : booking.price;
+      total += price;
+    });
+    return total;
+  };
   return (
     <>
       <div className="dashboard-title">Dashboard</div>
@@ -103,7 +107,7 @@ const UserDashboard = () => {
           <h2>Total Spendings</h2>
           <div className="card-data">
             <i className="bx bx-credit-card"></i>
-            <p>1000$</p>
+            <p>{getTotalSpent()}</p>
           </div>
         </div>
         <div className="dashboard-card">
@@ -111,17 +115,17 @@ const UserDashboard = () => {
 
           <div className="card-data">
             <i className="bx bxs-book"></i>
-            <p>3</p>
+            <p>{bookings.length}</p>
           </div>
         </div>
         <div className="dashboard-card">
           <h2>Active Bookings</h2>
           <div className="card-data">
             <i className="bx bxs-book-bookmark"></i>
-            <p>1</p>
+            <p>{countActiveBookings()}</p>
           </div>
         </div>
-        <div className="dashboard-stat">
+        <div className="dashboard-stat dash-general">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               width={500}
@@ -148,9 +152,10 @@ const UserDashboard = () => {
             </LineChart>
           </ResponsiveContainer>
         </div>
-        <div className="dashboard-data">Data</div>
-        <div className="dashboard-bookings">
-          <BookingDetails bookings={bookings} />
+        <div className="dashboard-data dash-general">Data</div>
+        <div className="dashboard-bookings dash-general">
+          <h3>Bookings</h3>
+          <BookingSummary bookings={bookings} />
         </div>
       </div>
     </>

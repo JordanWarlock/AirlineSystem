@@ -48,7 +48,7 @@ const Header = ({ imageUrl }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/signup" className="link">
+                  <Link to="/login" className="link">
                     | Sign Up
                   </Link>
                 </li>
@@ -75,7 +75,7 @@ const Header = ({ imageUrl }) => {
         </h3>
       </div>
       <button className="button" type="submit">
-        <Link to="/signup" className="link">
+        <Link to="/login" className="link">
           Try For Free
         </Link>
       </button>

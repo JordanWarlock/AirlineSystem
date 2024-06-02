@@ -74,6 +74,7 @@ const FlightResultPage = () => {
             resultsPerPage={resultsPerPage}
             nextPage={nextPage}
             previousPage={previousPage}
+            noBook={false}
           />
         ))
       )}

@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Header from "../Components/Header";
-import signupImageUrl from "../Pictures/signup.jpg";
-import Footer from "../Components/Footer";
 import "../css/LoginPage.css"; // Create a CSS file for styling
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpUsername, setSignUpUsername] = useState("");
+  const [signUpAge, setSignUpAge] = useState(0);
+  const [signUpPassword, setSignUpPassword] = useState("");
+  const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
+
+  const navigate = useNavigate();
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const authenticateUser = async (e) => {
     e.preventDefault();
     try {
@@ -31,32 +35,178 @@ const LoginPage = () => {
       }
     }
   };
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    if (
+      signUpPassword !== signUpConfirmPassword ||
+      signUpPassword === "" ||
+      signUpConfirmPassword === "" ||
+      signUpEmail === "" ||
+      signUpUsername === "" ||
+      signUpAge === 0
+    ) {
+      setErrorMessage("Please Fix Errors in Form");
+      return;
+    }
 
+    const user = {
+      userName: signUpUsername,
+      age: signUpAge,
+      email: signUpEmail,
+      password: signUpPassword,
+    };
+
+    try {
+      // eslint-disable-next-line
+      const response = await axios.post(
+        "http://localhost:5000/api/signup",
+        user
+      );
+      sessionStorage.setItem("userInfo", JSON.stringify(user));
+      setErrorMessage("");
+      navigate("/");
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setErrorMessage("Email already registered");
+      } else {
+        setErrorMessage("Error registering user");
+      }
+    }
+  };
   return (
     <div>
-      <Header imageUrl={signupImageUrl} />
-      <div className="floating-form">
-        <h1>Login</h1>
-        <form onSubmit={authenticateUser}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password" // Changed from "text" to "password" for security
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit">Login</button>
-        </form>
-        {errorMessage && <p className="error">{errorMessage}</p>}
+      <div
+        className={
+          isLoginMode ? "auth-container" : "auth-container sign-up-mode"
+        }
+      >
+        <div className="forms-container">
+          <div className="signin-signup">
+            <form
+              className="sign-in-form"
+              onSubmit={(e) => authenticateUser(e)}
+            >
+              <h2 className="title">Sign in</h2>
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <input type="submit" value="Login" className="btn solid" />
+            </form>
+            <form
+              className="sign-up-form"
+              style={!isLoginMode ? { width: "100%" } : { width: "0%" }}
+              onSubmit={(e) => handleSignUp(e)}
+            >
+              <h2 className="title">Sign up</h2>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={signUpUsername}
+                  onChange={(e) => setSignUpUsername(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={signUpEmail}
+                  onChange={(e) => setSignUpEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
+                <input
+                  type="number"
+                  placeholder="Age"
+                  value={signUpAge}
+                  onChange={(e) => setSignUpAge(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={signUpPassword}
+                  onChange={(e) => setSignUpPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={signUpConfirmPassword}
+                  onChange={(e) => setSignUpConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <input type="submit" className="btn" value="Sign up" />
+            </form>
+          </div>
+        </div>
+
+        <div className="panels-container">
+          <div className="panel left-panel">
+            <div className="content">
+              <h3>New here ?</h3>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Debitis, ex ratione. Aliquid!
+              </p>
+              <button
+                className="btn transparent"
+                id="sign-up-btn"
+                onClick={() => setIsLoginMode(false)}
+              >
+                Sign up
+              </button>
+            </div>
+            <img src="log.svg" className="image" alt="" />
+          </div>
+          <div className="panel right-panel">
+            <div className="content">
+              <h3>One of us ?</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+                laboriosam ad deleniti.
+              </p>
+              <button
+                className="btn transparent"
+                id="sign-in-btn"
+                onClick={() => setIsLoginMode(true)}
+              >
+                Sign in
+              </button>
+            </div>
+            <img src="register.svg" className="image" alt="" />
+          </div>
+        </div>
       </div>
-      <Footer />
     </div>
   );
 };

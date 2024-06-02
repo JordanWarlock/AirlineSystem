@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import DetailedFlightResult from "./DetailedFlightResult";
 import "../css/SummarizedFlightResult.css";
 import { useNavigate } from "react-router";
-import axios from "axios";
 import { Alert, Snackbar } from "@mui/material";
 
-const SummarizedFlightResult = ({ flight, rate, currency }) => {
+const SummarizedFlightResult = ({ flight, rate, currency, noBook }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
 
@@ -49,18 +48,14 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
       if (userInfo) {
         const payload = {
           user: userInfo._id,
-          flight: segments,
+          flight: flight,
           price: getPrice(total),
           bookingDateTime: new Date(),
           currency: currency,
+          status: "Booked",
         };
-        const response = await axios.post(
-          "http://localhost:5000/api/bookings",
-          payload
-        );
 
-        alert("Booking made successfully");
-        navigate("/");
+        navigate("/payment", { state: { bookingInfo: payload } });
       } else {
         setAlertOpen(true);
       }
@@ -72,7 +67,7 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
   };
 
   return (
-    <>
+    <div className="single-flight-data-details">
       <div className="single-flight-data">
         <div className="carrier-data">
           {segments.map((segment, index) => (
@@ -122,9 +117,12 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
           >
             View Details
           </button>
-          <button className="details-button" onClick={handleBooking}>
-            Book
-          </button>
+
+          {!noBook && (
+            <button className="details-button" onClick={handleBooking}>
+              Book
+            </button>
+          )}
         </div>
       </div>
       <div className="details">
@@ -149,7 +147,7 @@ const SummarizedFlightResult = ({ flight, rate, currency }) => {
           Please Login to book. Redirecting....
         </Alert>
       </Snackbar>
-    </>
+    </div>
   );
 };
 

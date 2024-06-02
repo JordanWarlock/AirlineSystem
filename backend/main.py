@@ -48,11 +48,8 @@ def getOnewayFlightsData():
 @app.route("/api/signup", methods=["POST"])
 def setSignupData():
     params = request.get_json()
-    firstName = params.get("firstName")
-    lastName = params.get("lastName")
+    userName = params.get("userName")
     age = params.get("age")
-    gender = params.get("gender")
-    country = params.get("country")
     email = params.get("email")
     password = params.get("password")
 
@@ -62,11 +59,8 @@ def setSignupData():
 
     
     db.users.insert_one({
-        "firstName": firstName,
-        "lastName": lastName,
+        "userName": userName,
         "age": age,
-        "gender": gender,
-        "country": country,
         "email": email,
         "password": password
     })
@@ -94,8 +88,8 @@ def login():
     password = params.get("password")
     
     user = db.users.find_one({"email": email,"password" : password})
-    user['_id'] = str(user['_id'])
     if user:
+        user['_id'] = str(user['_id'])
         return {"message": "Login successful","user":user}, 200
     return {"message": "Invalid email or password"}, 401
 
@@ -119,8 +113,8 @@ def getBookings():
     if request.method == "POST":
         params = request.get_json()
         existing_booking = db.bookings.find_one({"user": params.get("user"),"flight": params.get("flight"),"price": params.get("price")})
-        if existing_booking:
-            return "Booking already exists", 400
+        if existing_booking or params == {}:
+            return "Booking failed", 400
         db.bookings.insert_one(params)
         return "Booking Added Successfully", 201
     else:
@@ -168,7 +162,7 @@ def getStatus():
     response = getFlightStatus(carrierCode,flightNumber,departureDate)
     return response
 
-# Admin Console Endpoints
+
 
 @app.route("/api/admin/searchUser", methods=["POST"])
 def searchUser():

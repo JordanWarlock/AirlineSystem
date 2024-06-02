@@ -61,3 +61,15 @@
 strong {
   color: #333;
 }
+
+@media (max-width: 768px) {
+  .single-flight-data-details {
+    width: 90%;
+  }
+  .single-flight-data {
+    width: 100%;
+  }
+  .single-flight-data button {
+    width: 80%;
+  }
+}
