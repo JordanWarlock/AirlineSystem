@@ -20,6 +20,11 @@
   margin-top: 20px;
 }
 
+.agency-container .info-row h4{
+  color: black;
+  font-family:'Times New Roman', Times, serif;
+}
+
 .agency-container .agency-image {
   width: 400px;
   height: auto;
