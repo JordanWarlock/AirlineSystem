@@ -1,26 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Header.css";
 import { Link } from "react-router-dom";
 import UserProfileHeader from "./UserProfileHeader";
 
 const Header = ({ imageUrl }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const checkScreenSize = () => {
+    setIsSmallScreen(window.innerWidth <= 768);
+  };
+
+  useEffect(() => {
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   return (
     <header style={{ backgroundImage: `url(${imageUrl})` }}>
       <nav>
-        <ul>
-          <h1>
-            <li>
-              <Link to="/" className="link">
-                FLYEASE
-              </Link>
-            </li>
-          </h1>
+        <div className={`menu-toggle ${menuOpen ? "open" : ""}`} onClick={toggleMenu}>
+          &#9776;
+        </div>
+        {isSmallScreen && (
+          <div className="logo">
+            <Link to="/" className="link-logo-text">
+              FLYEASE
+            </Link>
+          </div>
+        )}
+        <ul className={`menu ${menuOpen ? "open" : ""}`}>
+          {!isSmallScreen && (
+            <h1>
+              <li>
+                <Link to="/" className="link">
+                  FLYEASE
+                </Link>
+              </li>
+            </h1>
+          )}
           <h2>
             <li>
               <Link to="/explore" className="link">
@@ -62,7 +85,7 @@ const Header = ({ imageUrl }) => {
         <h1>
           <ul>
             <li>Life Is Short And</li>
-            <li>The Wold is Wide!</li>
+            <li>The World is Wide!</li>
           </ul>
         </h1>
         <h3>
@@ -74,11 +97,13 @@ const Header = ({ imageUrl }) => {
           </ul>
         </h3>
       </div>
-      <button className="button" type="submit">
-        <Link to="/login" className="link">
-          Try For Free
-        </Link>
-      </button>
+      {!isSmallScreen && (
+        <button className="button" type="submit">
+          <Link to="/login" className="link">
+            Try For Free
+          </Link>
+        </button>
+      )}
     </header>
   );
 };
