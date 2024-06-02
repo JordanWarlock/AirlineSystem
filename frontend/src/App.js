@@ -9,6 +9,7 @@ import LoginPage from "./Pages/LoginPage";
 import UserProfilePage from "./Pages/UserProfilePage";
 import FlightStatus from "./Pages/FlightStatus";
 import AdminPage from "./Pages/AdminPage";
+import ExplorePage from "./Pages/ExplorePage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/flightstatus" element={<FlightStatus />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/explore" element={<ExplorePage />} />
       </Routes>
     </Router>
   );

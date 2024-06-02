@@ -187,4 +187,14 @@ def updateFlightStatus():
     db.users.update_one({"_id": user_id}, {"$set": {"flightStatus": new_status}})
     return "Flight Status Updated Successfully", 200
 
+@app.route("/api/topCities", methods=["GET"])
+def getTopCities():
+    top_cities = [
+        {"name": "Islamabad", "code": "ISB", "imageUrl": "https://as1.ftcdn.net/v2/jpg/03/84/72/34/1000_F_384723442_NwXSiqY7ttZNaxGdE5RfGlWYg3cUqhE3.jpg"},
+        {"name": "Dubai", "code": "DXB", "imageUrl": "path_to_dubai_image"},
+        {"name": "Jeddah", "code": "JED", "imageUrl": "path_to_jeddah_image"},
+        # Add more cities as needed
+    ]
+    return jsonify(top_cities)
+
 app.run(debug=True)
