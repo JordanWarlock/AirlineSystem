@@ -10,6 +10,7 @@ import FlightStatus from "./Pages/FlightStatus";
 import AdminPage from "./Pages/AdminPage";
 import StripeGateway from "./Components/StripeGateway";
 
+
 function App() {
   return (
     <Router>
