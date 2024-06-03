@@ -1,6 +1,7 @@
+import { useMemo } from "react";
 import {
-  LineChart,
-  Line,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -11,68 +12,35 @@ import {
 import BookingSummary from "./BookingSummary";
 
 const UserDashboard = ({ bookings }) => {
-  const data = [
-    {
-      name: "Jan",
-      MoneySpent: 400,
-      Bookings: 3,
-    },
-    {
-      name: "Feb",
-      MoneySpent: 500,
-      Bookings: 4,
-    },
-    {
-      name: "Mar",
-      MoneySpent: 600,
-      Bookings: 5,
-    },
-    {
-      name: "Apr",
-      MoneySpent: 700,
-      Bookings: 6,
-    },
-    {
-      name: "May",
-      MoneySpent: 800,
-      Bookings: 7,
-    },
-    {
-      name: "Jun",
-      MoneySpent: 900,
-      Bookings: 8,
-    },
-    {
-      name: "Jul",
-      MoneySpent: 1000,
-      Bookings: 9,
-    },
-    {
-      name: "Aug",
-      MoneySpent: 1100,
-      Bookings: 10,
-    },
-    {
-      name: "Sep",
-      MoneySpent: 1200,
-      Bookings: 11,
-    },
-    {
-      name: "Oct",
-      MoneySpent: 1300,
-      Bookings: 12,
-    },
-    {
-      name: "Nov",
-      MoneySpent: 1400,
-      Bookings: 13,
-    },
-    {
-      name: "Dec",
-      MoneySpent: 1500,
-      Bookings: 14,
-    },
-  ];
+  // Function to process bookings data
+  const processBookingsData = (bookings) => {
+    const monthlyData = {};
+
+    bookings.forEach((booking) => {
+      const bookingDate = new Date(booking.bookingDateTime);
+      const month = bookingDate.toLocaleString("default", { month: "short" });
+
+      if (!monthlyData[month]) {
+        monthlyData[month] = { MoneySpent: 0, TaxPaid: 0 };
+      }
+
+      const price =
+        typeof booking.price === "string"
+          ? parseFloat(booking.price)
+          : booking.price;
+      const tax = booking.flight.priceBreakdown.tax.units;
+
+      monthlyData[month].MoneySpent += price;
+      monthlyData[month].TaxPaid += tax;
+    });
+
+    return Object.entries(monthlyData).map(([month, values]) => ({
+      name: month,
+      ...values,
+    }));
+  };
+
+  const data = useMemo(() => processBookingsData(bookings), [bookings]);
 
   const countActiveBookings = () => {
     const currentTime = new Date();
@@ -88,6 +56,7 @@ const UserDashboard = ({ bookings }) => {
 
     return activeBookings.length;
   };
+
   const getTotalSpent = () => {
     let total = 0;
     bookings.forEach((booking) => {
@@ -99,6 +68,7 @@ const UserDashboard = ({ bookings }) => {
     });
     return total;
   };
+
   return (
     <>
       <div className="dashboard-title">Dashboard</div>
@@ -112,7 +82,6 @@ const UserDashboard = ({ bookings }) => {
         </div>
         <div className="dashboard-card">
           <h2>Total Bookings</h2>
-
           <div className="card-data">
             <i className="bx bxs-book"></i>
             <p>{bookings.length}</p>
@@ -127,7 +96,7 @@ const UserDashboard = ({ bookings }) => {
         </div>
         <div className="dashboard-stat dash-general">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart
+            <BarChart
               width={500}
               height={300}
               data={data}
@@ -143,16 +112,12 @@ const UserDashboard = ({ bookings }) => {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line
-                type="monotone"
-                dataKey="MoneySpent"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
+              <Bar dataKey="MoneySpent" fill="#8884d8" />
+              <Bar dataKey="TaxPaid" fill="#82ca9d" />
+            </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="dashboard-data dash-general">Data</div>
+
         <div className="dashboard-bookings dash-general">
           <h3>Bookings</h3>
           <BookingSummary bookings={bookings} />

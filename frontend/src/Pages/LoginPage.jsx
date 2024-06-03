@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../css/LoginPage.css"; // Create a CSS file for styling
+import { Switch } from "@mui/material";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,27 +14,56 @@ const LoginPage = () => {
   const [signUpAge, setSignUpAge] = useState(0);
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
+  const [checked, setChecked] = useState(false);
 
   const navigate = useNavigate();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const authenticateUser = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:5000/api/login", {
-        email,
-        password,
-      });
+    if (checked) {
+      try {
+        // eslint-disable-next-line
+        const response = await axios.post(
+          "http://localhost:5000/api/admin/login",
+          {
+            email,
+            password,
+          }
+        );
+        setErrorMessage("");
+        navigate("/admin");
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          setErrorMessage("Invalid email or password");
+        } else {
+          setErrorMessage("An error occurred. Please try again.");
+        }
+      }
+    } else {
+      try {
+        const response = await axios.post("http://localhost:5000/api/login", {
+          email,
+          password,
+        });
 
-      sessionStorage.setItem("userInfo", JSON.stringify(response.data["user"]));
-      setErrorMessage("");
-      navigate("/");
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setErrorMessage("Invalid email or password");
-      } else {
-        setErrorMessage("An error occurred. Please try again.");
+        sessionStorage.setItem(
+          "userInfo",
+          JSON.stringify(response.data["user"])
+        );
+        setErrorMessage("");
+        navigate("/");
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          setErrorMessage("Invalid email or password");
+        } else {
+          setErrorMessage("An error occurred. Please try again.");
+        }
       }
     }
+  };
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
   };
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -107,7 +137,21 @@ const LoginPage = () => {
                   required
                 />
               </div>
+              <div
+                className="input-field"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <Switch
+                  checked={checked}
+                  onChange={handleChange}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+                <p>Admin ?</p>
+              </div>
               <input type="submit" value="Login" className="btn solid" />
+              {errorMessage && (
+                <span style={{ color: "red" }}>{errorMessage}</span>
+              )}
             </form>
             <form
               className="sign-up-form"
@@ -166,6 +210,7 @@ const LoginPage = () => {
                 />
               </div>
               <input type="submit" className="btn" value="Sign up" />
+              {errorMessage && <span>{errorMessage}</span>}
             </form>
           </div>
         </div>
@@ -175,8 +220,7 @@ const LoginPage = () => {
             <div className="content">
               <h3>New here ?</h3>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Debitis, ex ratione. Aliquid!
+                Join us now to explore and get started. Create your account.
               </p>
               <button
                 className="btn transparent"
@@ -191,10 +235,7 @@ const LoginPage = () => {
           <div className="panel right-panel">
             <div className="content">
               <h3>One of us ?</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                laboriosam ad deleniti.
-              </p>
+              <p>Welcome back! Sign in to access your account.</p>
               <button
                 className="btn transparent"
                 id="sign-in-btn"

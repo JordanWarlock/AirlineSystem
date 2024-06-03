@@ -14,6 +14,7 @@ import {
   MenuItem,
   Select,
   InputLabel,
+  LinearProgress,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -27,6 +28,8 @@ const BookingPage = () => {
   const [returnDate, setReturnDate] = useState(null);
   const [passengerCount, setPassengerCount] = useState(1);
   const [travelClass, setTravelClass] = useState("ECONOMY");
+  const [searching, setSearching] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -38,6 +41,7 @@ const BookingPage = () => {
     ) {
       if (flightType === "OneWay") {
         try {
+          setSearching(true);
           const payload = {
             departureCode: selectedDeparture["code"],
             destinationCode: selectedDestination["code"],
@@ -53,6 +57,7 @@ const BookingPage = () => {
             state: { flightResults: response.data },
           });
         } catch (err) {
+          setSearching(false);
           console.error(err);
         }
       } else if (flightType === "Return" && returnDate !== "") {
@@ -79,6 +84,7 @@ const BookingPage = () => {
         console.log("Fill all fields");
       }
     } else {
+      setErrorMessage("Please fill all fields");
       console.log("Fill all fields");
     }
   };
@@ -86,6 +92,7 @@ const BookingPage = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="main-container">
+        {searching && <LinearProgress color="secondary" />}
         <h1>Book here</h1>
         <FormControl>
           <FormLabel className="triphere">Trip Type</FormLabel>
@@ -174,6 +181,7 @@ const BookingPage = () => {
             Search flights
           </Button>
         </div>
+        {errorMessage && <span style={{ color: "red" }}>{errorMessage}</span>}
       </div>
     </LocalizationProvider>
   );

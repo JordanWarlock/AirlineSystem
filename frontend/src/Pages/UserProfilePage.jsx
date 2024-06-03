@@ -29,11 +29,13 @@ const UserProfilePage = () => {
 
   const fetchUserBookings = async () => {
     try {
+      console.log(userInfo._id);
       const response = await axios.post(
         "http://localhost:5000/api/bookings/getUserBookings",
         { userInfo: userInfo._id }
       );
       setBookings(response.data);
+      console.log(response.data);
     } catch (err) {
       console.error(err);
     }

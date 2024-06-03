@@ -11,63 +11,69 @@ const BookingSummary = ({ bookings }) => {
     return dateTimeObject;
   };
   return (
-    <div className="booking-details">
-      {bookings.map((booking, bookingIndex) => {
-        const { bookingDateTime, price, currency } = booking;
-        const segments = booking.flight.segments;
+    <>
+      {bookings.length > 0 ? (
+        <div className="booking-details">
+          {bookings.map((booking, bookingIndex) => {
+            const { bookingDateTime, price, currency } = booking;
+            const segments = booking.flight.segments;
 
-        return (
-          <div className="single-flight-data" key={bookingIndex}>
-            <div className="carrier-data">
-              {segments.map((segment, index) => (
-                <div className="carrier-summary" key={index}>
-                  <img
-                    src={segment.legs[0].carriersData[0].logo}
-                    alt={segment.legs[0].carriersData[0].name}
-                  />
-                  <p>{segment.legs[0].carriersData[0].name}</p>
+            return (
+              <div className="single-flight-data" key={bookingIndex}>
+                <div className="carrier-data">
+                  {segments.map((segment, index) => (
+                    <div className="carrier-summary" key={index}>
+                      <img
+                        src={segment.legs[0].carriersData[0].logo}
+                        alt={segment.legs[0].carriersData[0].name}
+                      />
+                      <p>{segment.legs[0].carriersData[0].name}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <div className="flight-times">
-              {segments.map((segment, index) => (
-                <div className="summary" key={index}>
-                  <div className="time-code">
-                    <span className="time">
-                      {getLocaleDateTime(segment.departureTime).time}
-                    </span>
-                    <span className="airport-code">
-                      {segment.legs[0].departureAirport.code}
-                    </span>
-                  </div>
-                  <div className="separator">
-                    {segment.legs.length === 1 ? <>direct</> : <>multi</>}
-                  </div>
-                  <div className="time-code">
-                    <span className="time">
-                      {getLocaleDateTime(segment.arrivalTime).time}
-                    </span>
-                    <span className="airport-code">
-                      {segment.legs[0].arrivalAirport.code}
-                    </span>
-                  </div>
-                  <div className="duration">
-                    {Math.floor(segment.totalTime / 3600)}h{" "}
-                    {Math.floor((segment.totalTime % 3600) / 60)}m
+                <div className="flight-times">
+                  {segments.map((segment, index) => (
+                    <div className="summary" key={index}>
+                      <div className="time-code">
+                        <span className="time">
+                          {getLocaleDateTime(segment.departureTime).time}
+                        </span>
+                        <span className="airport-code">
+                          {segment.legs[0].departureAirport.code}
+                        </span>
+                      </div>
+                      <div className="separator">
+                        {segment.legs.length === 1 ? <>direct</> : <>multi</>}
+                      </div>
+                      <div className="time-code">
+                        <span className="time">
+                          {getLocaleDateTime(segment.arrivalTime).time}
+                        </span>
+                        <span className="airport-code">
+                          {segment.legs[0].arrivalAirport.code}
+                        </span>
+                      </div>
+                      <div className="duration">
+                        {Math.floor(segment.totalTime / 3600)}h{" "}
+                        {Math.floor((segment.totalTime % 3600) / 60)}m
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="price-actions">
+                  <p className="price">{price + " " + currency}</p>
+                  <div className="bookingDateTime price">
+                    {getLocaleDateTime(bookingDateTime).date}
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="price-actions">
-              <p className="price">{price + " " + currency}</p>
-              <div className="bookingDateTime price">
-                {getLocaleDateTime(bookingDateTime).date}
               </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div>No Bookings found</div>
+      )}
+    </>
   );
 };
 

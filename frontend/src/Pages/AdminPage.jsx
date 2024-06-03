@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import AdminBookings from "../Components/AdminBookings";
+import { useNavigate } from "react-router";
 
 const AdminConsole = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -28,6 +29,7 @@ const AdminConsole = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -79,6 +81,9 @@ const AdminConsole = () => {
       setSearchInput("");
       setSearchResults([]);
       setSelectedUser(null);
+    } else if (page === "Logout") {
+      sessionStorage.removeItem("userInfo");
+      navigate("/");
     }
   };
 
@@ -217,16 +222,24 @@ const AdminConsole = () => {
                 Bookings
               </button>
             </li>
+            <li>
+              <button
+                className="sidebar-button"
+                onClick={() => handleItemClick("Logout")}
+              >
+                <i className="fa-solid fa-arrow-right-from-bracket sidebar-button-icon"></i>{" "}
+                Logout
+              </button>
+            </li>
           </ul>
         )}
       </div>
       <div className="content">
         {activePage === "Dashboard" && (
           <>
-          <h1>Welcome to Admin Dashboard</h1>
+            <h1>Welcome to Admin Dashboard</h1>
             <div className="dashboard-row">
               <div className="d-card card-1">
-                
                 <h3 className="card-title">Total Users</h3>
                 <p className="card-description">{users.length}</p>
               </div>
@@ -282,7 +295,7 @@ const AdminConsole = () => {
         {activePage === "Users" && (
           <>
             <h2>User Search</h2>
-            <div className="search-container">
+            <div className="admin-search-container">
               <input
                 type="text"
                 value={searchInput}

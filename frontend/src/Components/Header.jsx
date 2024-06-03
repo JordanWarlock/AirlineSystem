@@ -24,7 +24,10 @@ const Header = ({ imageUrl }) => {
   return (
     <header style={{ backgroundImage: `url(${imageUrl})` }}>
       <nav>
-        <div className={`menu-toggle ${menuOpen ? "open" : ""}`} onClick={toggleMenu}>
+        <div
+          className={`menu-toggle ${menuOpen ? "open" : ""}`}
+          onClick={toggleMenu}
+        >
           &#9776;
         </div>
         {isSmallScreen && (
@@ -46,8 +49,8 @@ const Header = ({ imageUrl }) => {
           )}
           <h2>
             <li>
-              <Link to="/explore" className="link">
-                Explore
+              <Link to="/flightstatus" className="link">
+                Track Flight
               </Link>
             </li>
             <li>

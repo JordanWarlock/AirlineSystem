@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "../css/footer.css";
 import bestImage from "../Pictures/bestlogo.png";
 import faceImage from "../Pictures/facebook.png";
@@ -7,7 +7,7 @@ import instaImage from "../Pictures/instagram.png";
 
 const Footer = () => {
   return (
-    <footer className='footer'>
+    <footer className="footer">
       <div className="left-section">
         <h2>About Our Team</h2>
         <h3>
@@ -18,8 +18,8 @@ const Footer = () => {
           </ul>
         </h3>
       </div>
-        <img src={bestImage} alt="Best Img" className="bestImg" />
-        <h4>World Best Agency Winner</h4>
+      <img src={bestImage} alt="Best Img" className="bestImg" />
+      <h4>World Best Agency Winner</h4>
       <div className="right-section">
         <h5>Let's Stay Connected</h5>
         <div className="social-icons">
@@ -36,6 +36,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;
