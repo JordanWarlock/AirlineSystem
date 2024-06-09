@@ -2,6 +2,10 @@ import { React, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import SummarizedFlightResult from "../Components/SummarizedFlightComponent";
 import axios from "axios";
+import Header from "../Components/Header"
+import Footer from "../Components/Footer"
+import img from "../Pictures/signup.jpg"
+import "../css/FlightResultPage.css"
 import { Container } from "@mui/material";
 const FlightResultPage = () => {
   const location = useLocation();
@@ -52,8 +56,12 @@ const FlightResultPage = () => {
     // eslint-disable-next-line
   }, [currency]);
   return (
-    <Container>
+    <div>
+          <Header imageUrl={img} />
+              <Container>
+                <div className="flight">
       <h1>Flight Results</h1>
+      </div>
       <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
         {Object.keys(allRates).map((rate, index) => (
           <option key={index} value={rate}>
@@ -90,6 +98,9 @@ const FlightResultPage = () => {
         </button>
       </div>
     </Container>
+      <Footer/>
+
+    </div>
   );
 };
 
